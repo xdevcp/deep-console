@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" debug="true">
+
+  <property name="LogPattern" value="%d{yyy-MM-dd HH\:mm\:ss,GMT+8} %p %t - %m%n"/>
+
+  <appender name="stdoutAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <append>true</append>
+    <encoder>
+      <pattern>${LogPattern}</pattern>
+      <charset class="java.nio.charset.Charset">UTF-8</charset>
+    </encoder>
+  </appender>
+
+  <root level="debug">
+    <appender-ref ref="stdoutAppender"/>
+  </root>
+
+</configuration>

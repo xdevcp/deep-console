@@ -1,0 +1,29 @@
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+# Except this file !.gitignore
+.classpath
+.project
+.settings
+target
+.vscode
+.DS_Store
+/logs
+node_modules
+test/derby.log
+derby.log
+package-lock.json
+dist/

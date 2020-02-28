@@ -1,0 +1,5 @@
+App startup info ${application.version}
+Running in ${startup.mode} mode, ${startup.function.mode} function modules
+Port: ${server.port}
+Pid: ${pid}
+Console: http://${local.ip}:${server.port}/nacos/index.html

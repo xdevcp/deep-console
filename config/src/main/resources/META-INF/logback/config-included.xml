@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+  <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="app"/>
+  <springProperty scope="context" name="logPath" source="all.logs.path" defaultValue="${user.home}/.${appName}/logs"/>
+  <property name="LOG_HOME" value="${logPath}"/>
+
+</included>
+

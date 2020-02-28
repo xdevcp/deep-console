@@ -1,0 +1,12 @@
+# ApplicationListener
+org.springframework.context.ApplicationListener=\
+cc.devcp.project.core.listener.StandaloneProfileApplicationListener
+
+# EnvironmentPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=\
+cc.devcp.project.core.env.AppDefaultPropertySourceEnvironmentPostProcessor
+
+# SpringApplicationRunListener
+org.springframework.boot.SpringApplicationRunListener=\
+cc.devcp.project.core.listener.LoggingSpringApplicationRunListener,\
+cc.devcp.project.core.listener.StartingSpringApplicationRunListener

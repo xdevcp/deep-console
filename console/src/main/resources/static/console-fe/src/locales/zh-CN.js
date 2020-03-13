@@ -18,7 +18,7 @@ const I18N_CONF = {
     usernameRequired: '用户名不能为空',
   },
   MainLayout: {
-    nacosName: 'NACOS',
+    applicationName: 'APP',
     doesNotExist: '您访问的页面不存在',
     configurationManagementVirtual: '配置管理',
     configurationManagement: '配置列表',
@@ -30,10 +30,10 @@ const I18N_CONF = {
     configRollback: '配置回滚',
     historyDetail: '历史详情',
     listeningToQuery: '监听查询',
-    serviceManagementVirtual: '服务管理',
-    serviceManagement: '服务列表',
-    subscriberList: '订阅者列表',
-    serviceDetail: '服务详情',
+    serviceManagementVirtual: '数据管理',
+    serviceManagement: '导入列表',
+    subscriberList: '导出列表',
+    serviceDetail: '导入详情',
     namespace: '命名空间',
   },
   Password: {
@@ -74,7 +74,7 @@ const I18N_CONF = {
     namespaceOperation: '操作',
   },
   ServiceList: {
-    serviceList: '服务列表',
+    serviceList: '导入列表',
     serviceName: '服务名称',
     serviceNamePlaceholder: '请输入服务名称',
     hiddenEmptyService: '隐藏空服务',
@@ -96,7 +96,7 @@ const I18N_CONF = {
     create: '创建服务',
   },
   SubscriberList: {
-    subscriberList: '订阅者列表',
+    subscriberList: '导出列表',
     serviceName: '服务名称',
     serviceNamePlaceholder: '请输入服务名称',
     groupName: '分组名称',
@@ -130,7 +130,7 @@ const I18N_CONF = {
     metadata: '元数据',
   },
   ServiceDetail: {
-    serviceDetails: '服务详情',
+    serviceDetails: '导入详情',
     back: '返回',
     editCluster: '集群配置',
     cluster: '集群',

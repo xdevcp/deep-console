@@ -42,9 +42,10 @@ public class ReloadableConfigs {
         }
         if (inputStream == null) {
             inputStream = getClass().getResourceAsStream("/application.properties");
+        } else {
+            properties.load(inputStream);
+            inputStream.close();
         }
-        properties.load(inputStream);
-        inputStream.close();
         this.properties = properties;
     }
 

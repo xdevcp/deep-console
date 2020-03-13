@@ -413,7 +413,7 @@ class MainLayout extends React.Component {
 
   render() {
     const { locale = {}, version } = this.props;
-    const { nacosName, doesNotExist } = locale;
+    const { applicationName, doesNotExist } = locale;
     const { showLink, navRow, leftBarClose, noChild } = this.state;
     return (
       <div className="viewFramework-product" style={{ top: 66 }}>
@@ -435,9 +435,9 @@ class MainLayout extends React.Component {
                   <div
                     style={{ textIndent: 0, display: !version ? 'none' : 'block' }}
                     className="product-nav-title"
-                    title={nacosName}
+                    title={applicationName}
                   >
-                    <span>{nacosName}</span>
+                    <span>{applicationName}</span>
                     <span style={{ marginLeft: 5 }}>{version}</span>
                   </div>
                 )}

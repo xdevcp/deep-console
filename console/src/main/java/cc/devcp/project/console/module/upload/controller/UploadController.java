@@ -24,7 +24,7 @@ import java.io.IOException;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = "/upload", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/upload", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(tags = "自定义上传")
 public class UploadController {
 
@@ -32,8 +32,11 @@ public class UploadController {
     private UploadService uploadService;
 
     @ApiOperation("查询上传任务")
-    @GetMapping(value = "/query")
-    public ResEntity<PageResult<LoadBatchEntity>> queryDataBatch(String dealerId, PageParam pageParam) {
+    @GetMapping(value = "/list")
+    public ResEntity<PageResult<LoadBatchEntity>> queryList(@RequestParam(required = false) int pageNo,
+                                                            @RequestParam(required = false) int pageSize,
+                                                            String dealerId) {
+        PageParam pageParam = PageParam.of(pageNo, pageSize);
         return uploadService.queryDataBatch(dealerId, pageParam);
     }
 

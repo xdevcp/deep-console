@@ -34,6 +34,7 @@ const I18N_CONF = {
     serviceManagement: 'Service List',
     subscriberList: 'Subscribers',
     serviceDetail: 'Service Details',
+    DataDictList: 'DataDicts',
     namespace: 'Namespace',
   },
   Password: {
@@ -97,6 +98,19 @@ const I18N_CONF = {
   },
   SubscriberList: {
     subscriberList: 'Subscriber List',
+    serviceName: 'Service Name',
+    serviceNamePlaceholder: 'Enter Service Name',
+    groupName: 'Group Name',
+    groupNamePlaceholder: 'Enter Group Name',
+    query: 'Search',
+    pubNoData: 'No results found.',
+    address: 'Address',
+    clientVersion: 'Client Version',
+    appName: 'Application Name',
+    searchServiceNamePrompt: 'Service name required!',
+  },
+  DataDictList: {
+    dataDictList: 'DataDict List',
     serviceName: 'Service Name',
     serviceNamePlaceholder: 'Enter Service Name',
     groupName: 'Group Name',

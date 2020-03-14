@@ -19,10 +19,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * @Description 数据字典实体
- * @Author DING DONG
- * @Date 2019/12/13 10:57
- * @Version 1.0
+ * @author deep.wu
+ * @version 1.0 on 2020/3/14
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

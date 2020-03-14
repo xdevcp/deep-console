@@ -1,4 +1,4 @@
-package cc.devcp.project.config.server.result;
+package cc.devcp.project.common.result;
 
 /**
  * @author klw

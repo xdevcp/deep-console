@@ -1,6 +1,5 @@
-package cc.devcp.project.config.server.result;
+package cc.devcp.project.common.result;
 
-import cc.devcp.project.config.server.model.RestResult;
 import org.springframework.util.Assert;
 
 /**

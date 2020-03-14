@@ -1,7 +1,7 @@
 package cc.devcp.project.console.module.def.controller;
 
 
-import cc.devcp.project.config.server.model.RestResult;
+import cc.devcp.project.common.result.RestResult;
 import cc.devcp.project.console.security.AppAuthConfig;
 import cc.devcp.project.console.security.roles.AppRoleServiceImpl;
 import cc.devcp.project.core.auth.ActionTypes;

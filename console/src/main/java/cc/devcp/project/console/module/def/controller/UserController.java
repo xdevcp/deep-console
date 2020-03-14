@@ -3,7 +3,7 @@ package cc.devcp.project.console.module.def.controller;
 import cc.devcp.project.core.auth.*;
 import com.alibaba.fastjson.JSONObject;
 import cc.devcp.project.common.constant.CommonConst;
-import cc.devcp.project.config.server.model.RestResult;
+import cc.devcp.project.common.result.RestResult;
 import cc.devcp.project.config.server.model.User;
 import cc.devcp.project.console.security.AppAuthConfig;
 import cc.devcp.project.console.security.AppAuthManager;

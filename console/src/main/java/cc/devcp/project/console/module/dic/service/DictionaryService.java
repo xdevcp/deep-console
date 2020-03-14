@@ -24,10 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description 数据字典业务层
- * @Author DING DONG
- * @Date 2019/12/13 11:26
- * @Version 1.0
+ * @author deep.wu
+ * @version 1.0 on 2020/3/14
  */
 @Service
 public class DictionaryService {

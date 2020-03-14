@@ -1,4 +1,4 @@
-package cc.devcp.project.config.server.model;
+package cc.devcp.project.common.result;
 
 import java.io.Serializable;
 

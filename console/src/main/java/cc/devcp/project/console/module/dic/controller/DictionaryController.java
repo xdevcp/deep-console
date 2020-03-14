@@ -1,5 +1,6 @@
 package cc.devcp.project.console.module.dic.controller;
 
+import cc.devcp.project.common.constant.GlobalRouter;
 import cc.devcp.project.common.model.page.PageParam;
 import cc.devcp.project.common.model.page.PageResult;
 import cc.devcp.project.common.model.response.ResEntity;
@@ -20,14 +21,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description 数据字典接口
- * @Author DING DONG
- * @Date 2019/12/13 11:26
- * @Version 1.0
+ * @author deep.wu
+ * @version 1.0 on 2020/3/14
  */
 @Slf4j
 @RestController
-@RequestMapping(value = "/open", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = GlobalRouter.OPEN, produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(tags = "数据字典管理")
 public class DictionaryController {
 
@@ -42,9 +41,11 @@ public class DictionaryController {
      */
     @ApiOperation(value = "queryDictionary", notes = "分页查询数据字典")
     @GetMapping("/dictionary")
-    public ResEntity<PageResult<DictionaryEntity>> queryDictionary(PageParam param, @RequestParam
-                @Validated(Query.class) Integer parentId) {
-        return dictionaryService.queryDictionary(param, parentId);
+    public ResEntity<PageResult<DictionaryEntity>> queryDictionary(@RequestParam(required = false) int pageNo,
+                                                                   @RequestParam(required = false) int pageSize,
+                                                                   @RequestParam @Validated(Query.class) Integer parentId) {
+        PageParam pageParam = PageParam.of(pageNo, pageSize);
+        return dictionaryService.queryDictionary(pageParam, parentId);
     }
 
     /**
@@ -73,13 +74,13 @@ public class DictionaryController {
 
     /**
      * @param childId
-     * @return ResEntity<Map<String,Object>>
+     * @return ResEntity<Map < String, Object>>
      * @desc: 查找父级id以及父级的值
      * @date 2019/12/19 19:31
      */
     @ApiOperation(value = "queryParentId", notes = "根据子级Id查找父级Id")
     @GetMapping("/dictionary/getPid")
-    public ResEntity<Map<String,Object>> queryParentId(@RequestParam String childId) {
+    public ResEntity<Map<String, Object>> queryParentId(@RequestParam String childId) {
         return dictionaryService.queryParentId(childId);
     }
 
@@ -107,11 +108,3 @@ public class DictionaryController {
         return dictionaryService.findDictionaryByType(dicType);
     }
 }
-
-
-
-
-
-
-
-

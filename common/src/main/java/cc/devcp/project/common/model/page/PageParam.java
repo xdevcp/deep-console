@@ -37,7 +37,11 @@ public class PageParam implements Serializable {
         this.size = size;
     }
 
-    public static PageParam of(int current, int size) {
+    public static PageParam of(Integer current, Integer size) {
+        if (current == null || size == null) {
+            current = 1;
+            size = 10;
+        }
         return new PageParam(current, size);
     }
 
@@ -90,9 +94,9 @@ public class PageParam implements Serializable {
     @Override
     public String toString() {
         return "PageParam{" +
-                "current=" + current +
-                ", size=" + size +
-                '}';
+            "current=" + current +
+            ", size=" + size +
+            '}';
     }
 
 }

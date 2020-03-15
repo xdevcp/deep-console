@@ -23,9 +23,9 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("load_batch")
+@TableName("load_data_batch")
 @ApiModel(value="LoadBatchEntity对象", description="")
-public class LoadBatchEntity implements Serializable {
+public class LoadDataBatchEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

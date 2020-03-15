@@ -11,10 +11,11 @@ import java.util.List;
  * @author deep.wu
  * @version 1.0 on 2020/3/14
  */
-public interface DictionaryMapper  extends BaseMapper<DictionaryEntity> {
+public interface DictionaryMapper extends BaseMapper<DictionaryEntity> {
     /**
      * 批量修改数据字典状态
-     * @param idList
+     *
+     * @param items
      * @param status
      * @return int
      * @date 2019/12/23 14:11

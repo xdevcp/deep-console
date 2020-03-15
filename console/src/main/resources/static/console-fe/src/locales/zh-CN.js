@@ -122,6 +122,7 @@ const I18N_CONF = {
     field3: '字典值',
     field4: '排序序号',
     field5: '状态',
+    field6: '更新时间',
     operation: '操作',
     detail: '详情',
     deleteAction: '删除',

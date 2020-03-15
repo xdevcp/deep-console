@@ -2,7 +2,7 @@ package cc.devcp.project.console.module.upload.service.impl;
 
 import cc.devcp.project.common.enums.ResultCodeEnum;
 import cc.devcp.project.common.exception.CommRuntimeException;
-import cc.devcp.project.console.module.upload.entity.LoadBatchEntity;
+import cc.devcp.project.console.module.upload.entity.LoadDataBatchEntity;
 import cc.devcp.project.common.module.entity.LoadTempCustomerEntity;
 import cc.devcp.project.common.module.mapper.LoadTempCustomerMapper;
 import cc.devcp.project.console.module.upload.data.CustomerTagData;
@@ -66,7 +66,7 @@ public class LoadTempCustomerServiceImpl extends ServiceImpl<LoadTempCustomerMap
         return pageInfo;
     }
 
-    public void doValidate(LoadBatchEntity loadBatchEntity) throws IOException, SftpException {
+    public void doValidate(LoadDataBatchEntity loadBatchEntity) throws IOException, SftpException {
         int pageNum = 1;
         int pageSize = 1000;
         long total = 0;
@@ -154,7 +154,7 @@ public class LoadTempCustomerServiceImpl extends ServiceImpl<LoadTempCustomerMap
     }
 
     @Async
-    public void doProcess(LoadBatchEntity loadBatchEntity) {
+    public void doProcess(LoadDataBatchEntity loadBatchEntity) {
         int pageNum = 1;
         int pageSize = 1000;
         long successTotal = 0;
@@ -177,7 +177,7 @@ public class LoadTempCustomerServiceImpl extends ServiceImpl<LoadTempCustomerMap
         log.info("成功上传总数:{}", successTotal);
     }
 
-    private void saveValidData(LoadBatchEntity loadBatchEntity, LoadTempCustomerEntity tempEntity) {
+    private void saveValidData(LoadDataBatchEntity loadBatchEntity, LoadTempCustomerEntity tempEntity) {
         log.info("saveValidData loadBatchEntity :{}, tempEntity :{}", loadBatchEntity.toString(), tempEntity.toString());
     }
 

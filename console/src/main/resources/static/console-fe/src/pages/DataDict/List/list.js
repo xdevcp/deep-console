@@ -49,6 +49,10 @@ class DataDictList extends React.Component {
     this.field = new Field(this);
   }
 
+  componentDidMount() {
+    this.queryList(0);
+  }
+
   openLoading() {
     this.setState({ loading: true });
   }
@@ -63,36 +67,39 @@ class DataDictList extends React.Component {
     } catch (error) {}
   }
 
-  queryList() {
-    const { search, currentPage, pageSize, parentId = 0 } = this.state;
+  queryList(delayTime = 2000) {
+    const self = this;
+    const { search, currentPage, pageSize, parentId } = self.state;
     const parameter = [`pageNo=${currentPage}`, `pageSize=${pageSize}`, `parentId=${parentId}`];
     // console.log(111);
-    request({
-      url: `v1/open/dictionary?${parameter.join('&')}`,
-      beforeSend: () => this.openLoading(),
-      success: res => {
-        if (res.success === true) {
-          const count = res.data.total;
-          const dataList = res.data.list || [];
-          this.setState({
-            dataSource: dataList,
-            total: count,
-          });
-        } else {
-          Dialog.alert({
-            title: prompt,
-            content: res.message,
-          });
-        }
-      },
-      error: () =>
-        this.setState({
-          dataSource: [],
-          total: 0,
-          currentPage: 0,
-        }),
-      complete: () => this.closeLoading(),
-    });
+    setTimeout(() => {
+      request({
+        url: `v1/open/dictionary?${parameter.join('&')}`,
+        beforeSend: () => self.openLoading(),
+        success: res => {
+          if (res.success === true) {
+            const count = res.data.total;
+            const dataList = res.data.list || [];
+            self.setState({
+              dataSource: dataList,
+              total: count,
+            });
+          } else {
+            Dialog.alert({
+              title: prompt,
+              content: res.message,
+            });
+          }
+        },
+        error: () =>
+          self.setState({
+            dataSource: [],
+            total: 0,
+            currentPage: 0,
+          }),
+        complete: () => self.closeLoading(),
+      });
+    }, delayTime);
   }
 
   getQueryLater = () => {
@@ -211,6 +218,7 @@ class DataDictList extends React.Component {
                 <Column title={locale.field3} dataIndex="dataValue" />
                 <Column title={locale.field4} dataIndex="sortNo" />
                 <Column title={locale.field5} dataIndex="status" />
+                <Column title={locale.field6} dataIndex="updateTime" />
                 <Column
                   title={operation}
                   align="center"

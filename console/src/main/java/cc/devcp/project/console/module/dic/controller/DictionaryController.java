@@ -2,11 +2,9 @@ package cc.devcp.project.console.module.dic.controller;
 
 import cc.devcp.project.common.constant.GlobalRouter;
 import cc.devcp.project.common.model.page.PageParam;
-import cc.devcp.project.common.model.page.PageResult;
 import cc.devcp.project.common.model.response.ResEntity;
 import cc.devcp.project.common.validator.Create;
 import cc.devcp.project.common.validator.Modify;
-import cc.devcp.project.common.validator.Query;
 import cc.devcp.project.console.module.dic.entity.DictionaryEntity;
 import cc.devcp.project.console.module.dic.service.DictionaryService;
 import io.swagger.annotations.Api;
@@ -41,11 +39,11 @@ public class DictionaryController {
      */
     @ApiOperation(value = "queryDictionary", notes = "分页查询数据字典")
     @GetMapping("/dictionary")
-    public ResEntity<PageResult<DictionaryEntity>> queryDictionary(@RequestParam(required = false) int pageNo,
-                                                                   @RequestParam(required = false) int pageSize,
-                                                                   @RequestParam @Validated(Query.class) Integer parentId) {
-        PageParam pageParam = PageParam.of(pageNo, pageSize);
-        return dictionaryService.queryDictionary(pageParam, parentId);
+    public ResEntity queryDictionary(@RequestParam(required = false) Integer pageNo,
+                                     @RequestParam(required = false) Integer pageSize,
+                                     @RequestParam(required = false) String parentId,
+                                     @RequestParam(required = false) String status) {
+        return dictionaryService.queryDictionary(PageParam.of(pageNo, pageSize), parentId, status);
     }
 
     /**

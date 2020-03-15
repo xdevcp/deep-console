@@ -1,6 +1,6 @@
 package cc.devcp.project.console.module.upload.utils;
 
-import cc.devcp.project.console.module.upload.entity.LoadBatchEntity;
+import cc.devcp.project.console.module.upload.entity.LoadDataBatchEntity;
 
 /**
  * @author deep.wu
@@ -8,7 +8,7 @@ import cc.devcp.project.console.module.upload.entity.LoadBatchEntity;
  */
 public class LoadBatchTemp {
 
-    public static void set(LoadBatchEntity entity, Long numberAll, Long numberInvalid, Long numberValid, String status) {
+    public static void set(LoadDataBatchEntity entity, Long numberAll, Long numberInvalid, Long numberValid, String status) {
         entity.setNumberAll(numberAll);
         entity.setNumberInvalid(numberInvalid);
         entity.setNumberValid(numberValid);

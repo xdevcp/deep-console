@@ -2,12 +2,12 @@ package cc.devcp.project.console.module.dic.service;
 
 import cc.devcp.project.common.exception.CommRuntimeException;
 import cc.devcp.project.common.model.page.PageParam;
-import cc.devcp.project.common.model.page.PageResult;
 import cc.devcp.project.common.model.response.ResEntity;
 import cc.devcp.project.console.module.dic.entity.DBEnum;
 import cc.devcp.project.console.module.dic.entity.DicEnum;
 import cc.devcp.project.console.module.dic.entity.DictionaryEntity;
 import cc.devcp.project.console.module.dic.mapper.DictionaryMapper;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.PageHelper;
@@ -24,8 +24,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author deep.wu
- * @version 1.0 on 2020/3/14
+ * <pre>
+ *     description: 数据字典
+ * </pre>
+ *
+ * @author deep.pw
+ * @version 2020.03.15
  */
 @Service
 public class DictionaryService {
@@ -34,17 +38,23 @@ public class DictionaryService {
     private DictionaryMapper dictionaryMapper;
 
     /**
-     * @param
-     * @return ResEntity
-     * @desc: 分页查询字典类型
-     * @date 2019/12/17 19:16
+     * <pre>
+     *     description: 分页查询字典类型
+     * </pre>
+     *
+     * @author deep.pw
+     * @version 2020.03.15
      */
-    public ResEntity<PageResult<DictionaryEntity>> queryDictionary(PageParam param, Integer parentId) {
+    public ResEntity queryDictionary(PageParam param, String parentId, String status) {
         QueryWrapper<DictionaryEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("DIC_PARENT_ID", parentId)
-                .eq("DIC_STATUS", DBEnum.VALID.getCode())
-                .orderByAsc("DIC_SORT_NO")
-                .orderByDesc("DIC_UPDATE_TIME");
+        if (!StrUtil.isBlankOrUndefined(parentId)) {
+            queryWrapper.eq("DIC_PARENT_ID", parentId);
+        }
+        if (!StrUtil.isBlankOrUndefined(status)) {
+            queryWrapper.eq("DIC_STATUS", status);
+        }
+        queryWrapper.orderByAsc("DIC_SORT_NO");
+        queryWrapper.orderByDesc("DIC_UPDATE_TIME");
 
         PageInfo<DictionaryEntity> pageInfo = PageHelper.startPage(param.getCurrent(), param.getSize()).doSelectPageInfo(() -> {
             dictionaryMapper.selectList(queryWrapper);
@@ -54,10 +64,12 @@ public class DictionaryService {
     }
 
     /**
-     * @param dictionaryEntity
-     * @return ResEntity
-     * @desc: 创建数据字典
-     * @date 2019/12/17 19:18
+     * <pre>
+     *     description: 创建数据字典
+     * </pre>
+     *
+     * @author deep.pw
+     * @version 2020.03.15
      */
     @Transactional(rollbackFor = CommRuntimeException.class)
     public ResEntity createDictionary(DictionaryEntity dictionaryEntity) {
@@ -66,17 +78,17 @@ public class DictionaryService {
         if (dictionaryEntity.getParentId() == 0) {
             // 校验字典类型是否重复
             queryWrapper.eq("DIC_DATA_TYPE", dictionaryEntity.getDataType())
-                    .eq("DIC_PARENT_ID", dictionaryEntity.getParentId());
+                .eq("DIC_PARENT_ID", dictionaryEntity.getParentId());
             if (dictionaryMapper.selectOne(queryWrapper) != null) {
                 return ResEntity.fail(DicEnum.DIC_TYPE_EXITS);
             }
         } else {
-            if(StringUtils.isBlank(dictionaryEntity.getDataCode())){
+            if (StringUtils.isBlank(dictionaryEntity.getDataCode())) {
                 return ResEntity.fail(DicEnum.DIC_CODE_CANNOT_BE_NULL);
             }
             // 校验数据编码是否重复
             queryWrapper.eq("DIC_DATA_CODE", dictionaryEntity.getDataCode())
-                    .eq("DIC_PARENT_ID", dictionaryEntity.getParentId());
+                .eq("DIC_PARENT_ID", dictionaryEntity.getParentId());
             if (dictionaryMapper.selectOne(queryWrapper) != null) {
                 return ResEntity.fail(DicEnum.DIC_CODE_EXITS);
             }
@@ -108,13 +120,13 @@ public class DictionaryService {
         int res = 0;
         QueryWrapper<DictionaryEntity> queryWrapper = new QueryWrapper<>();
         if (dictionaryEntity.getParentId() == 0) {
-            if(StringUtils.isBlank(dictionaryEntity.getDataType())){
+            if (StringUtils.isBlank(dictionaryEntity.getDataType())) {
                 return ResEntity.fail(DicEnum.DIC_TYPE_CANNOT_BE_NULL);
             }
             // 校验字典类型是否存在不包含本身
             queryWrapper.eq("DIC_DATA_TYPE", dictionaryEntity.getDataType())
-                    .eq("DIC_PARENT_ID", dictionaryEntity.getParentId())
-                    .ne("DIC_ID", dictionaryEntity.getId());
+                .eq("DIC_PARENT_ID", dictionaryEntity.getParentId())
+                .ne("DIC_ID", dictionaryEntity.getId());
             if (dictionaryMapper.selectOne(queryWrapper) != null) {
                 throw new CommRuntimeException(DicEnum.DIC_TYPE_EXITS);
             }
@@ -137,13 +149,13 @@ public class DictionaryService {
                 throw new CommRuntimeException(DicEnum.DIC_MODIFY_ERROR);
             }
         } else {
-            if(StringUtils.isBlank(dictionaryEntity.getDataCode())){
+            if (StringUtils.isBlank(dictionaryEntity.getDataCode())) {
                 return ResEntity.fail(DicEnum.DIC_CODE_CANNOT_BE_NULL);
             }
             // 校验数据编码是否存在不包含本身
             queryWrapper.eq("DIC_DATA_CODE", dictionaryEntity.getDataCode())
-                    .eq("DIC_PARENT_ID", dictionaryEntity.getParentId())
-                    .ne("DIC_ID", dictionaryEntity.getId());
+                .eq("DIC_PARENT_ID", dictionaryEntity.getParentId())
+                .ne("DIC_ID", dictionaryEntity.getId());
             if (dictionaryMapper.selectOne(queryWrapper) != null) {
                 throw new CommRuntimeException(DicEnum.DIC_CODE_EXITS);
             }
@@ -158,12 +170,12 @@ public class DictionaryService {
 
     /**
      * @param childId
-     * @return ResEntity<Map<String,Object>>
+     * @return ResEntity<Map < String, Object>>
      * @desc: 查找父级id以及父级的值
      * @date 2019/12/19 19:31
      */
-    public ResEntity<Map<String,Object>> queryParentId(String childId) {
-        Map<String,Object> map = new HashMap<>(16);
+    public ResEntity<Map<String, Object>> queryParentId(String childId) {
+        Map<String, Object> map = new HashMap<>(16);
 
         QueryWrapper<DictionaryEntity> queryUpLevelWrapper = new QueryWrapper<>();
         queryUpLevelWrapper.eq("DIC_VALUE_ID", childId);
@@ -175,10 +187,10 @@ public class DictionaryService {
         if (upEntity.getParentId() == null) {
             throw new CommRuntimeException(DicEnum.DIC_PARENT_NOT_EXITS);
         }
-        map.put("pid",upEntity.getParentId());
+        map.put("pid", upEntity.getParentId());
 
         // 如果不是字典类型 需要查找父级字典的值
-        if(upEntity.getParentId() != 0){
+        if (upEntity.getParentId() != 0) {
             QueryWrapper<DictionaryEntity> queryDicValueWrapper = new QueryWrapper<>();
             queryDicValueWrapper.eq("DIC_VALUE_ID", upEntity.getParentId());
 
@@ -248,8 +260,8 @@ public class DictionaryService {
 
         QueryWrapper<DictionaryEntity> queryDicTypeWrapper = new QueryWrapper<>();
         queryDicTypeWrapper.eq("DIC_DATA_TYPE", dicType)
-                .eq("DIC_PARENT_ID", 0)
-                .eq("DIC_STATUS", DBEnum.VALID.getCode());
+            .eq("DIC_PARENT_ID", 0)
+            .eq("DIC_STATUS", DBEnum.VALID.getCode());
         DictionaryEntity dicTypeEntity = dictionaryMapper.selectOne(queryDicTypeWrapper);
         if (dicTypeEntity == null) {
             throw new CommRuntimeException(DicEnum.DIC_TYPE_NOT_EXITS);
@@ -257,9 +269,9 @@ public class DictionaryService {
 
         QueryWrapper<DictionaryEntity> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("DIC_PARENT_ID", dicTypeEntity.getValueId())
-                .eq("DIC_STATUS", DBEnum.VALID.getCode())
-                .orderByAsc("DIC_SORT_NO")
-                .orderByDesc("DIC_UPDATE_TIME");
+            .eq("DIC_STATUS", DBEnum.VALID.getCode())
+            .orderByAsc("DIC_SORT_NO")
+            .orderByDesc("DIC_UPDATE_TIME");
         List<DictionaryEntity> list = dictionaryMapper.selectList(queryWrapper);
 
         return ResEntity.ok(list);

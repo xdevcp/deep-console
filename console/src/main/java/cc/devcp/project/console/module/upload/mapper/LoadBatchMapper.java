@@ -1,6 +1,6 @@
 package cc.devcp.project.console.module.upload.mapper;
 
-import cc.devcp.project.console.module.upload.entity.LoadBatchEntity;
+import cc.devcp.project.console.module.upload.entity.LoadDataBatchEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author deep
  * @since 2020-01-31
  */
-public interface LoadBatchMapper extends BaseMapper<LoadBatchEntity> {
+public interface LoadBatchMapper extends BaseMapper<LoadDataBatchEntity> {
 
 }

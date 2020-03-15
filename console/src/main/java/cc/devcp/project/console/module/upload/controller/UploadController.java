@@ -3,7 +3,7 @@ package cc.devcp.project.console.module.upload.controller;
 import cc.devcp.project.common.model.page.PageParam;
 import cc.devcp.project.common.model.page.PageResult;
 import cc.devcp.project.common.model.response.ResEntity;
-import cc.devcp.project.console.module.upload.entity.LoadBatchEntity;
+import cc.devcp.project.console.module.upload.entity.LoadDataBatchEntity;
 import cc.devcp.project.console.module.upload.enums.ResEnum;
 import cc.devcp.project.console.module.upload.service.UploadService;
 import com.jcraft.jsch.SftpException;
@@ -33,9 +33,9 @@ public class UploadController {
 
     @ApiOperation("查询上传任务")
     @GetMapping(value = "/list")
-    public ResEntity<PageResult<LoadBatchEntity>> queryList(@RequestParam(required = false) int pageNo,
-                                                            @RequestParam(required = false) int pageSize,
-                                                            String dealerId) {
+    public ResEntity<PageResult<LoadDataBatchEntity>> queryList(@RequestParam(required = false) int pageNo,
+                                                                @RequestParam(required = false) int pageSize,
+                                                                String dealerId) {
         PageParam pageParam = PageParam.of(pageNo, pageSize);
         return uploadService.queryDataBatch(dealerId, pageParam);
     }

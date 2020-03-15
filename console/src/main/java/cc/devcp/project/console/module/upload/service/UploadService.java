@@ -5,7 +5,7 @@ import cc.devcp.project.common.model.page.PageParam;
 import cc.devcp.project.common.model.page.PageResult;
 import cc.devcp.project.common.model.response.ResEntity;
 import cc.devcp.project.console.module.upload.data.CustomerTagData;
-import cc.devcp.project.console.module.upload.entity.LoadBatchEntity;
+import cc.devcp.project.console.module.upload.entity.LoadDataBatchEntity;
 import cc.devcp.project.console.module.upload.enums.StatusEnum;
 import cc.devcp.project.console.module.upload.enums.TypeEnum;
 import cc.devcp.project.console.module.upload.listener.CustomerTagDataListener;
@@ -56,13 +56,13 @@ public class UploadService {
      * @param pageParam
      * @return
      */
-    public ResEntity<PageResult<LoadBatchEntity>> queryDataBatch(String dealerId, PageParam pageParam) {
-        QueryWrapper<LoadBatchEntity> queryWrapper = new QueryWrapper<>();
+    public ResEntity<PageResult<LoadDataBatchEntity>> queryDataBatch(String dealerId, PageParam pageParam) {
+        QueryWrapper<LoadDataBatchEntity> queryWrapper = new QueryWrapper<>();
         if (ObjectUtil.isNotEmpty(dealerId)) {
-            queryWrapper.eq(LoadBatchEntity.LB_CREATE_USER, dealerId);
+            queryWrapper.eq(LoadDataBatchEntity.LB_CREATE_USER, dealerId);
         }
-        queryWrapper.orderByDesc(LoadBatchEntity.LB_ID);
-        PageInfo<LoadBatchEntity> pageInfo = PageHelper.startPage(pageParam.getCurrent(), pageParam.getSize()).doSelectPageInfo(
+        queryWrapper.orderByDesc(LoadDataBatchEntity.LB_ID);
+        PageInfo<LoadDataBatchEntity> pageInfo = PageHelper.startPage(pageParam.getCurrent(), pageParam.getSize()).doSelectPageInfo(
             () -> loadBatchService.list(queryWrapper));
         pageInfo.getList().forEach(item -> {
             if (StringUtils.isNotEmpty(item.getUploadFileName())) {
@@ -116,7 +116,7 @@ public class UploadService {
             log.error("EasyExcel Error:{}", e.getMessage());
         }
 
-        LoadBatchEntity loadDataBatchEntity = createBatch(id, dealerId, TypeEnum.CustomerTag.name(), upload);
+        LoadDataBatchEntity loadDataBatchEntity = createBatch(id, dealerId, TypeEnum.CustomerTag.name(), upload);
 
         loadTempCustomerService.doValidate(loadDataBatchEntity);
     }
@@ -130,9 +130,9 @@ public class UploadService {
      * @param fileName
      * @return
      */
-    private LoadBatchEntity createBatch(Long id, String dealerId, String type, String fileName) {
+    private LoadDataBatchEntity createBatch(Long id, String dealerId, String type, String fileName) {
 
-        LoadBatchEntity loadDataBatchEntity = new LoadBatchEntity();
+        LoadDataBatchEntity loadDataBatchEntity = new LoadDataBatchEntity();
         loadDataBatchEntity.setId(id);
         loadDataBatchEntity.setCreateUser(dealerId);
         loadDataBatchEntity.setCreateDate(LocalDateTime.now());

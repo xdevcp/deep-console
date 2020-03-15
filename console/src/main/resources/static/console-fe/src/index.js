@@ -42,7 +42,7 @@ import PropTypes from 'prop-types';
 module.hot && module.hot.accept();
 
 if (!localStorage.getItem(LANGUAGE_KEY)) {
-  localStorage.setItem(LANGUAGE_KEY, navigator.language === 'zh-CN' ? 'zh-CN' : 'en-US');
+  localStorage.setItem(LANGUAGE_KEY, navigator.language === 'en-US' ? 'en-US' : 'zh-CN');
 }
 
 const reducer = combineReducers({

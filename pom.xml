@@ -536,13 +536,6 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
-            <!--[解决]mybatis-plus使用jdk8的LocalDateTime 查询时报错-->
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-typehandlers-jsr310</artifactId>
-                <version>1.0.2</version>
-            </dependency>
-
             <!--pagehelper-->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>

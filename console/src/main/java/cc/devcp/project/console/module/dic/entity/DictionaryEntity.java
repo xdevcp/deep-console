@@ -16,7 +16,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author deep.wu
@@ -62,7 +64,7 @@ public class DictionaryEntity implements Serializable {
 
     @TableField(value = "DIC_UPDATE_TIME")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 }
 

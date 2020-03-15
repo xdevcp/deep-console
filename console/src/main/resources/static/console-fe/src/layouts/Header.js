@@ -91,11 +91,11 @@ class Header extends React.Component {
               </Menu>
             </Dropdown>
           )}
-          {/*
-          <span className="language-switch language-switch-primary" onClick={this.switchLang}>
-            {languageSwitchButton}
-          </span>
-          */}
+          {
+            <span className="language-switch language-switch-primary" onClick={this.switchLang}>
+              {languageSwitchButton}
+            </span>
+          }
           <div className="header-menu header-menu-open">
             <ul>
               {NAV_MENU.map(item => (

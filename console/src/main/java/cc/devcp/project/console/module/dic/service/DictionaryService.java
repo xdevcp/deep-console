@@ -7,6 +7,8 @@ import cc.devcp.project.console.module.dic.entity.DBEnum;
 import cc.devcp.project.console.module.dic.entity.DicEnum;
 import cc.devcp.project.console.module.dic.entity.DictionaryEntity;
 import cc.devcp.project.console.module.dic.mapper.DictionaryMapper;
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -94,7 +96,7 @@ public class DictionaryService {
             }
         }
         dictionaryEntity.setStatus(DBEnum.VALID.getCode());
-        dictionaryEntity.setUpdateTime(LocalDateTime.now());
+        dictionaryEntity.setUpdateTime(DateUtil.date());
         res = dictionaryMapper.insert(dictionaryEntity);
         if (res != 1) {
             throw new CommRuntimeException(DicEnum.DIC_CREATE_ERROR);
@@ -143,7 +145,7 @@ public class DictionaryService {
                 dictionaryMapper.update(updateEntity, updateWrapper);
             }
             // 更新字典类型
-            dictionaryEntity.setUpdateTime(LocalDateTime.now());
+            dictionaryEntity.setUpdateTime(DateUtil.date());
             res = dictionaryMapper.updateById(dictionaryEntity);
             if (res != 1) {
                 throw new CommRuntimeException(DicEnum.DIC_MODIFY_ERROR);
@@ -159,7 +161,7 @@ public class DictionaryService {
             if (dictionaryMapper.selectOne(queryWrapper) != null) {
                 throw new CommRuntimeException(DicEnum.DIC_CODE_EXITS);
             }
-            dictionaryEntity.setUpdateTime(LocalDateTime.now());
+            dictionaryEntity.setUpdateTime(DateUtil.date());
             res = dictionaryMapper.updateById(dictionaryEntity);
             if (res != 1) {
                 throw new CommRuntimeException(DicEnum.DIC_MODIFY_ERROR);

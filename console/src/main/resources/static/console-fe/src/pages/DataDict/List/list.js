@@ -22,6 +22,7 @@ import './list.scss';
 const FormItem = Form.Item;
 const { Row, Col } = Grid;
 const { Column } = Table;
+const configsTableSelected = new Map();
 
 @ConfigProvider.config
 class DataDictList extends React.Component {
@@ -44,6 +45,11 @@ class DataDictList extends React.Component {
       search: {
         dataCode: '',
         dataType: '',
+      },
+      isCheckAll: false,
+      rowSelection: {
+        onChange: this.configDataTableOnChange.bind(this),
+        selectedRowKeys: [],
       },
     };
     this.field = new Field(this);
@@ -132,11 +138,20 @@ class DataDictList extends React.Component {
     });
   }
 
+  configDataTableOnChange(ids, records) {
+    const { rowSelection } = this.state;
+    rowSelection.selectedRowKeys = ids;
+    this.setState({ rowSelection });
+    configsTableSelected.clear();
+    records.forEach((record, i) => {
+      configsTableSelected.set(record.id, record);
+    });
+  }
+
   render() {
     const { locale = {} } = this.props;
     const {
       pubNoData,
-      DataDictList,
       dataCode,
       dataCodePlaceholder,
       dataType,
@@ -163,8 +178,23 @@ class DataDictList extends React.Component {
           visible={this.state.loading}
           tip="Loading..."
         >
-          <h3 className="page-title">
-            <span className="title-item">{DataDictList}</span>
+          <h3
+            style={{
+              height: 30,
+              width: '100%',
+              lineHeight: '30px',
+              padding: 0,
+              margin: 0,
+              paddingLeft: 10,
+              borderLeft: '3px solid #09c',
+              color: '#ccc',
+              fontSize: '12px',
+            }}
+          >
+            <span style={{ fontSize: '14px', color: '#000', marginRight: 8 }}>数据字典</span>
+            {locale.queryResults}
+            <strong style={{ fontWeight: 'bold' }}> {this.state.total} </strong>
+            条命中
           </h3>
           <Row
             className="demo-row"
@@ -175,6 +205,7 @@ class DataDictList extends React.Component {
           >
             <Col span="24">
               <Form inline field={this.field}>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <FormItem label={dataCode}>
                   <Input
                     placeholder={dataCodePlaceholder}
@@ -212,13 +243,20 @@ class DataDictList extends React.Component {
           </Row>
           <Row style={{ padding: 0 }}>
             <Col span="24" style={{ padding: 0 }}>
-              <Table dataSource={this.state.dataSource} locale={{ empty: pubNoData }}>
+              <Table
+                dataSource={this.state.dataSource}
+                locale={{ empty: pubNoData }}
+                fixedHeader
+                maxBodyHeight={400}
+                ref={'dataTable'}
+                rowSelection={this.state.rowSelection}
+              >
                 <Column title={locale.field1} dataIndex="dataType" />
                 <Column title={locale.field2} dataIndex="dataCode" />
                 <Column title={locale.field3} dataIndex="dataValue" />
                 <Column title={locale.field4} dataIndex="sortNo" />
                 <Column title={locale.field5} dataIndex="status" />
-                <Column title={locale.field6} dataIndex="updateTime" />
+                <Column title={locale.field6} dataIndex="updateTime" width={200} />
                 <Column
                   title={operation}
                   align="center"

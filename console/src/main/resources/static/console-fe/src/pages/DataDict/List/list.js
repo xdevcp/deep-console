@@ -12,17 +12,17 @@ import {
   Dialog,
   Message,
   ConfigProvider,
-  Switch,
+  Select,
 } from '@alifd/next';
 import { request } from '../../../globalLib';
 import EditDataDictDialog from '../Detail/EditDialog';
 
 import './list.scss';
 
-const FormItem = Form.Item;
 const { Row, Col } = Grid;
 const { Column } = Table;
 const configsTableSelected = new Map();
+let timestamp = Date.now();
 
 @ConfigProvider.config
 class DataDictList extends React.Component {
@@ -46,6 +46,8 @@ class DataDictList extends React.Component {
         dataCode: '',
         dataType: '',
       },
+      dataTypeList: [],
+      selectValue: [],
       isCheckAll: false,
       rowSelection: {
         onChange: this.configDataTableOnChange.bind(this),
@@ -80,16 +82,14 @@ class DataDictList extends React.Component {
     // console.log(111);
     setTimeout(() => {
       request({
-        url: `v1/open/dictionary?${parameter.join('&')}`,
+        url: `v1/open/dict?${parameter.join('&')}`,
         beforeSend: () => self.openLoading(),
         success: res => {
           if (res.success === true) {
-            const count = res.data.total;
-            const dataList = res.data.list || [];
-            self.setState({
-              dataSource: dataList,
-              total: count,
-            });
+            const total = res.data.total;
+            self.setState({ total });
+            const dataSource = res.data.list || [];
+            self.setState({ dataSource });
           } else {
             Dialog.alert({
               title: prompt,
@@ -148,20 +148,34 @@ class DataDictList extends React.Component {
     });
   }
 
+  setDataType(value) {
+    const { search } = this.state;
+    search.dataType = value;
+    this.setState({ search });
+  }
+
+  handleSearch = value => {
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+    this.searchTimeout = setTimeout(() => {
+      request({
+        method: 'GET',
+        url: `v1/open/dataType?code=utf-8&q=${value}`,
+        success: res => {
+          const dataTypeList = res.result.map(item => ({
+            label: item[0],
+            value: (timestamp++).toString(36),
+          }));
+          this.setState({ dataTypeList });
+        },
+      });
+    }, 100);
+  };
+
   render() {
     const { locale = {} } = this.props;
-    const {
-      pubNoData,
-      dataCode,
-      dataCodePlaceholder,
-      dataType,
-      dataTypePlaceholder,
-      query,
-      create,
-      operation,
-      detail,
-      deleteAction,
-    } = locale;
+    const { pubNoData, query, create, operation, detail, deleteAction } = locale;
     const { search } = this.state;
     const { init, getValue } = this.field;
     this.init = init;
@@ -204,27 +218,29 @@ class DataDictList extends React.Component {
             }}
           >
             <Col span="24">
-              <Form inline field={this.field}>
+              <Form inline>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <FormItem label={dataCode}>
+                <Form.Item label={locale.dataCode}>
                   <Input
-                    placeholder={dataCodePlaceholder}
+                    placeholder={locale.dataCodePlaceholder}
                     style={{ width: 200 }}
                     value={search.dataCode}
                     onChange={dataCode => this.setState({ search: { ...search, dataCode } })}
                     onPressEnter={() => this.setState({ currentPage: 1 }, () => this.queryList())}
                   />
-                </FormItem>
-                <FormItem label={dataType}>
-                  <Input
-                    placeholder={dataTypePlaceholder}
-                    style={{ width: 200 }}
-                    value={search.dataType}
-                    onChange={dataType => this.setState({ search: { ...search, dataType } })}
-                    onPressEnter={() => this.setState({ currentPage: 1 }, () => this.queryList())}
+                </Form.Item>
+                <Form.Item label={locale.dataType}>
+                  <Select
+                    style={{ width: 300 }}
+                    placeholder={locale.dataTypePlaceholder}
+                    showSearch
+                    mode="single"
+                    dataSource={this.state.dataTypeList}
+                    onSearch={this.handleSearch}
+                    onChange={this.setDataType.bind(this)}
                   />
-                </FormItem>
-                <FormItem label="">
+                </Form.Item>
+                <Form.Item label="">
                   <Button
                     type="primary"
                     onClick={() => this.setState({ currentPage: 1 }, () => this.queryList())}
@@ -232,12 +248,12 @@ class DataDictList extends React.Component {
                   >
                     {query}
                   </Button>
-                </FormItem>
-                <FormItem label="" style={{ float: 'right' }}>
+                </Form.Item>
+                <Form.Item label="" style={{ float: 'right' }}>
                   <Button type="secondary" onClick={() => this.openEditDataDictDialog()}>
                     {create}
                   </Button>
-                </FormItem>
+                </Form.Item>
               </Form>
             </Col>
           </Row>

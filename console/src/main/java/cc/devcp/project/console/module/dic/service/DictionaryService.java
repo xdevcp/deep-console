@@ -2,12 +2,13 @@ package cc.devcp.project.console.module.dic.service;
 
 import cc.devcp.project.common.exception.CommRuntimeException;
 import cc.devcp.project.common.model.page.PageParam;
-import cc.devcp.project.common.model.response.ResEntity;
+import cc.devcp.project.common.model.result.ArrayResult;
+import cc.devcp.project.common.model.result.ResEntity;
+import cc.devcp.project.common.model.result.ResultData;
 import cc.devcp.project.console.module.dic.entity.DBEnum;
 import cc.devcp.project.console.module.dic.entity.DicEnum;
 import cc.devcp.project.console.module.dic.entity.DictionaryEntity;
 import cc.devcp.project.console.module.dic.mapper.DictionaryMapper;
-import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -19,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,10 +47,11 @@ public class DictionaryService {
      * @author deep.pw
      * @version 2020.03.15
      */
-    public ResEntity queryDictionary(PageParam param, String parentId, String status) {
+    public ResEntity queryDictionary(PageParam param, String dataType, String status) {
+        ResultData<DictionaryEntity> resultData = new ResultData();
         QueryWrapper<DictionaryEntity> queryWrapper = new QueryWrapper<>();
-        if (!StrUtil.isBlankOrUndefined(parentId)) {
-            queryWrapper.eq("DIC_PARENT_ID", parentId);
+        if (!StrUtil.isBlankOrUndefined(dataType)) {
+            queryWrapper.eq("DIC_DATA_TYPE", dataType);
         }
         if (!StrUtil.isBlankOrUndefined(status)) {
             queryWrapper.eq("DIC_STATUS", status);
@@ -62,7 +63,28 @@ public class DictionaryService {
             dictionaryMapper.selectList(queryWrapper);
         });
 
-        return ResEntity.ok(pageInfo);
+        resultData.setTotal(pageInfo.getTotal());
+        resultData.setList(pageInfo.getList());
+        return ResEntity.ok(resultData);
+    }
+
+    public ArrayResult queryDataType(String q) {
+
+        QueryWrapper<DictionaryEntity> queryWrapper = new QueryWrapper<>();
+        if (!StrUtil.isBlankOrUndefined(q)) {
+            queryWrapper.like("DIC_DATA_TYPE", q);
+        }
+        queryWrapper.eq("DIC_PARENT_ID", 0);
+        List<DictionaryEntity> typeList = dictionaryMapper.selectList(queryWrapper);
+
+        List list = new ArrayList();
+        for (DictionaryEntity entity : typeList) {
+            if (StringUtils.isNotEmpty(entity.getDataType())) {
+                String[] args = new String[]{entity.getDataType(), entity.getDataValue()};
+                list.add(args);
+            }
+        }
+        return ArrayResult.ok(list);
     }
 
     /**

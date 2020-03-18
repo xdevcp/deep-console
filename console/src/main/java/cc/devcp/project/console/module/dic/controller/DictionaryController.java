@@ -2,7 +2,8 @@ package cc.devcp.project.console.module.dic.controller;
 
 import cc.devcp.project.common.constant.GlobalRouter;
 import cc.devcp.project.common.model.page.PageParam;
-import cc.devcp.project.common.model.response.ResEntity;
+import cc.devcp.project.common.model.result.ArrayResult;
+import cc.devcp.project.common.model.result.ResEntity;
 import cc.devcp.project.common.validator.Create;
 import cc.devcp.project.common.validator.Modify;
 import cc.devcp.project.console.module.dic.entity.DictionaryEntity;
@@ -31,19 +32,21 @@ public class DictionaryController {
     @Autowired
     private DictionaryService dictionaryService;
 
-    /**
-     * @param
-     * @return ResEntity
-     * @desc: 分页查询数据字典
-     * @date 2019/12/17 19:16
-     */
-    @ApiOperation(value = "queryDictionary", notes = "分页查询数据字典")
-    @GetMapping("/dictionary")
+
+    @ApiOperation(value = "查询数据字典")
+    @GetMapping("/dict")
     public ResEntity queryDictionary(@RequestParam(required = false) Integer pageNo,
                                      @RequestParam(required = false) Integer pageSize,
-                                     @RequestParam(required = false) String parentId,
+                                     @RequestParam(required = false) String dataType,
                                      @RequestParam(required = false) String status) {
-        return dictionaryService.queryDictionary(PageParam.of(pageNo, pageSize), parentId, status);
+        return dictionaryService.queryDictionary(PageParam.of(pageNo, pageSize), dataType, status);
+    }
+
+
+    @ApiOperation(value = "查询数据类型")
+    @GetMapping("/dataType")
+    public ArrayResult queryDataType(@RequestParam(required = false) String q) {
+        return dictionaryService.queryDataType(q);
     }
 
     /**

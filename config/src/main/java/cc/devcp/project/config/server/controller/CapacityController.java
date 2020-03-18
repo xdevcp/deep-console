@@ -1,7 +1,7 @@
 package cc.devcp.project.config.server.controller;
 
 import cc.devcp.project.config.server.constant.Constants;
-import cc.devcp.project.common.result.RestResult;
+import cc.devcp.project.common.model.result.RestResult;
 import cc.devcp.project.config.server.model.capacity.Capacity;
 import cc.devcp.project.config.server.service.capacity.CapacityService;
 import org.apache.commons.lang3.StringUtils;

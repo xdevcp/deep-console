@@ -1,4 +1,4 @@
-package cc.devcp.project.common.model.response;
+package cc.devcp.project.common.model.result;
 
 import cc.devcp.project.common.enums.CommEnum;
 import cc.devcp.project.common.exception.CommException;

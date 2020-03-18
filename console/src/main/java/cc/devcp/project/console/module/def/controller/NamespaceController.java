@@ -1,6 +1,6 @@
 package cc.devcp.project.console.module.def.controller;
 
-import cc.devcp.project.common.result.RestResult;
+import cc.devcp.project.common.model.result.RestResult;
 import cc.devcp.project.config.server.model.TenantInfo;
 import cc.devcp.project.config.server.service.PersistService;
 import cc.devcp.project.console.model.Namespace;

@@ -1,4 +1,4 @@
-package cc.devcp.project.common.result;
+package cc.devcp.project.common.model.result;
 
 import java.io.Serializable;
 

@@ -1,14 +1,14 @@
 package cc.devcp.project.config.server.controller;
 
 import cc.devcp.project.common.exception.GlobalException;
-import cc.devcp.project.common.result.RestResult;
+import cc.devcp.project.common.model.result.RestResult;
 import cc.devcp.project.config.server.auth.ConfigResourceParser;
 import cc.devcp.project.config.server.model.*;
 import cc.devcp.project.config.server.utils.*;
 import cc.devcp.project.config.server.constant.Constants;
 import cc.devcp.project.config.server.controller.parameters.SameNamespaceCloneConfigBean;
-import cc.devcp.project.common.result.ResultBuilder;
-import cc.devcp.project.common.result.ResultCodeEnum;
+import cc.devcp.project.common.model.result.ResultBuilder;
+import cc.devcp.project.common.model.result.ResultCodeEnum;
 import cc.devcp.project.config.server.service.AggrWhitelist;
 import cc.devcp.project.config.server.service.ConfigDataChangeEvent;
 import cc.devcp.project.config.server.service.ConfigSubService;

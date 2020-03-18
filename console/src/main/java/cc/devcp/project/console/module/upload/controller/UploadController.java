@@ -2,7 +2,7 @@ package cc.devcp.project.console.module.upload.controller;
 
 import cc.devcp.project.common.model.page.PageParam;
 import cc.devcp.project.common.model.page.PageResult;
-import cc.devcp.project.common.model.response.ResEntity;
+import cc.devcp.project.common.model.result.ResEntity;
 import cc.devcp.project.console.module.upload.entity.LoadDataBatchEntity;
 import cc.devcp.project.console.module.upload.enums.ResEnum;
 import cc.devcp.project.console.module.upload.service.UploadService;

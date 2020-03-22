@@ -3,14 +3,12 @@
 
     <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="app"/>
     <springProperty scope="context" name="logPath" source="all.logs.path" defaultValue="${user.home}/.${appName}/logs"/>
+
     <property name="LOG_HOME" value="${logPath}"/>
     <property name="LogPattern"
               value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) %-5level %thread %c [%L] %msg%n"/>
 
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-
-    <include resource="META-INF/logback/config-included.xml"/>
-    <include optional="true" resource="META-INF/logback/config-included.xml"/>
 
     <appender name="stdoutAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -25,6 +23,8 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
+
+    <include resource="META-INF/logback/config-included.xml" optional="true"/>
 
     <appender name="rootFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">

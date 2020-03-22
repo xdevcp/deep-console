@@ -4,5 +4,10 @@
   <springProperty scope="context" name="logPath" source="all.logs.path" defaultValue="${user.home}/.${appName}/logs"/>
   <property name="LOG_HOME" value="${logPath}"/>
 
+<!--    <logger name="cc.devcp.project.config">-->
+<!--        <appender-ref ref="stdoutAppender"/>-->
+<!--        <level value="debug"/>-->
+<!--    </logger>-->
+
 </included>
 

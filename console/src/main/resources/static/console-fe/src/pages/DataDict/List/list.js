@@ -15,7 +15,7 @@ import {
   Select,
 } from '@alifd/next';
 import { request } from '../../../globalLib';
-import EditDataDictDialog from '../Detail/EditDialog';
+import EditDialog from '../Detail/EditDialog';
 
 import './list.scss';
 
@@ -43,7 +43,6 @@ class DataDictList extends React.Component {
       currentPage: 1,
       dataSource: [],
       search: {
-        dataCode: '',
         dataType: '',
       },
       dataTypeList: [],
@@ -58,6 +57,7 @@ class DataDictList extends React.Component {
   }
 
   componentDidMount() {
+    this.handleSearch();
     this.queryList(0);
   }
 
@@ -69,7 +69,8 @@ class DataDictList extends React.Component {
     this.setState({ loading: false });
   }
 
-  openEditDataDictDialog() {
+  // create and update
+  openEditDialog() {
     try {
       this.editDialog.current.getInstance().show(this.state.source);
     } catch (error) {}
@@ -77,8 +78,12 @@ class DataDictList extends React.Component {
 
   queryList(delayTime = 2000) {
     const self = this;
-    const { search, currentPage, pageSize, parentId } = self.state;
-    const parameter = [`pageNo=${currentPage}`, `pageSize=${pageSize}`, `parentId=${parentId}`];
+    const { search, currentPage, pageSize } = self.state;
+    const parameter = [
+      `pageNo=${currentPage}`,
+      `pageSize=${pageSize}`,
+      `dataType=${search.dataType}`,
+    ];
     // console.log(111);
     setTimeout(() => {
       request({
@@ -164,8 +169,8 @@ class DataDictList extends React.Component {
         url: `v1/open/dataType?code=utf-8&q=${value}`,
         success: res => {
           const dataTypeList = res.result.map(item => ({
-            label: item[0],
-            value: (timestamp++).toString(36),
+            label: item[1],
+            value: item[0],
           }));
           this.setState({ dataTypeList });
         },
@@ -176,7 +181,6 @@ class DataDictList extends React.Component {
   render() {
     const { locale = {} } = this.props;
     const { pubNoData, query, create, operation, detail, deleteAction } = locale;
-    const { search } = this.state;
     const { init, getValue } = this.field;
     this.init = init;
     this.getValue = getValue;
@@ -220,23 +224,13 @@ class DataDictList extends React.Component {
             <Col span="24">
               <Form inline>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <Form.Item label={locale.dataCode}>
-                  <Input
-                    placeholder={locale.dataCodePlaceholder}
-                    style={{ width: 200 }}
-                    value={search.dataCode}
-                    onChange={dataCode => this.setState({ search: { ...search, dataCode } })}
-                    onPressEnter={() => this.setState({ currentPage: 1 }, () => this.queryList())}
-                  />
-                </Form.Item>
                 <Form.Item label={locale.dataType}>
-                  <Select
+                  <Select.AutoComplete
                     style={{ width: 300 }}
                     placeholder={locale.dataTypePlaceholder}
                     showSearch
                     mode="single"
                     dataSource={this.state.dataTypeList}
-                    onSearch={this.handleSearch}
                     onChange={this.setDataType.bind(this)}
                   />
                 </Form.Item>
@@ -250,7 +244,7 @@ class DataDictList extends React.Component {
                   </Button>
                 </Form.Item>
                 <Form.Item label="" style={{ float: 'right' }}>
-                  <Button type="secondary" onClick={() => this.openEditDataDictDialog()}>
+                  <Button type="secondary" onClick={() => this.openEditDialog()}>
                     {create}
                   </Button>
                 </Form.Item>
@@ -319,7 +313,7 @@ class DataDictList extends React.Component {
             </div>
           )}
         </Loading>
-        <EditDataDictDialog
+        <EditDialog
           ref={this.editDialog}
           openLoading={() => this.openLoading()}
           closeLoading={() => this.closeLoading()}

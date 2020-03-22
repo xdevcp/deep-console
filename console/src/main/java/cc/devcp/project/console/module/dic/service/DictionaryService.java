@@ -56,6 +56,7 @@ public class DictionaryService {
         if (!StrUtil.isBlankOrUndefined(status)) {
             queryWrapper.eq("DIC_STATUS", status);
         }
+        queryWrapper.ne("DIC_PARENT_ID", 0);
         queryWrapper.orderByAsc("DIC_SORT_NO");
         queryWrapper.orderByDesc("DIC_UPDATE_TIME");
 

@@ -6,8 +6,8 @@ import { DIALOG_FORM_LAYOUT, METADATA_SEPARATOR, METADATA_ENTER } from './consta
 import MonacoEditor from 'components/MonacoEditor';
 
 @ConfigProvider.config
-class EditDataDictDialog extends React.Component {
-  static displayName = 'EditDataDictDialog';
+class EditDialog extends React.Component {
+  static displayName = 'EditDialog';
 
   static propTypes = {
     queryDataDictList: PropTypes.func,
@@ -20,7 +20,7 @@ class EditDataDictDialog extends React.Component {
     this.state = {
       isCreate: false,
       editDataDict: {},
-      editDataDictDialogVisible: false,
+      EditDialogVisible: false,
       errors: { name: {}, protectThreshold: {} },
     };
     this.show = this.show.bind(this);
@@ -32,11 +32,11 @@ class EditDataDictDialog extends React.Component {
     if (Object.keys(metadata).length) {
       editDataDict.metadataText = JSON.stringify(metadata, null, '\t');
     }
-    this.setState({ editDataDict, editDataDictDialogVisible: true, isCreate: !name });
+    this.setState({ editDataDict, EditDialogVisible: true, isCreate: !name });
   }
 
   hide() {
-    this.setState({ editDataDictDialogVisible: false });
+    this.setState({ EditDialogVisible: false });
   }
 
   validator(field) {
@@ -115,7 +115,7 @@ class EditDataDictDialog extends React.Component {
 
   render() {
     const { locale = {} } = this.props;
-    const { isCreate, editDataDict, editDataDictDialogVisible, errors } = this.state;
+    const { isCreate, editDataDict, EditDialogVisible, errors } = this.state;
     const {
       name,
       protectThreshold,
@@ -128,7 +128,7 @@ class EditDataDictDialog extends React.Component {
       <Dialog
         className="DataDict-detail-edit-dialog"
         title={isCreate ? locale.createDataDict : locale.updateDataDict}
-        visible={editDataDictDialogVisible}
+        visible={EditDialogVisible}
         onOk={() => this.onConfirm()}
         onCancel={() => this.hide()}
         onClose={() => this.hide()}
@@ -200,4 +200,4 @@ class EditDataDictDialog extends React.Component {
   }
 }
 
-export default EditDataDictDialog;
+export default EditDialog;

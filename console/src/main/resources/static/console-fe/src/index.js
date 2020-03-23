@@ -31,6 +31,7 @@ import ServiceList from './pages/ServiceManagement/ServiceList';
 import ServiceDetail from './pages/ServiceManagement/ServiceDetail';
 import SubscriberList from './pages/ServiceManagement/SubscriberList';
 import DataDictList from './pages/DataDict/List';
+import DataDictDetail from './pages/DataDict/Detail';
 import Welcome from './pages/Welcome/Welcome';
 
 import reducers from './reducers';
@@ -76,6 +77,7 @@ const MENU = [
   { path: '/serviceDetail', component: ServiceDetail },
   { path: '/subscriberList', component: SubscriberList },
   { path: '/dataDictList', component: DataDictList },
+  { path: '/dataDictDetail', component: DataDictDetail },
 ];
 
 @connect(

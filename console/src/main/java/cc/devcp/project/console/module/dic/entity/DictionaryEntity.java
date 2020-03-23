@@ -16,8 +16,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -32,7 +30,7 @@ public class DictionaryEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "DIC_ID", type= IdType.AUTO)
+    @TableId(value = "DIC_ID", type = IdType.AUTO)
     private Integer id;
 
     @TableField(value = "DIC_VALUE_ID")
@@ -63,10 +61,7 @@ public class DictionaryEntity implements Serializable {
     private String dataDesc;
 
     @TableField(value = "DIC_UPDATE_TIME")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
 }
-
-
-

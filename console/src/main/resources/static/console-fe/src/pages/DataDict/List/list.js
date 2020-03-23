@@ -166,7 +166,7 @@ class DataDictList extends React.Component {
     this.searchTimeout = setTimeout(() => {
       request({
         method: 'GET',
-        url: `v1/open/dataType?code=utf-8&q=${value}`,
+        url: `v1/open/dataType?unicode=utf-8&q=${value}`,
         success: res => {
           const dataTypeList = res.result.map(item => ({
             label: item[1],
@@ -280,7 +280,9 @@ class DataDictList extends React.Component {
                       <a
                         onClick={() =>
                           this.props.history.push(
-                            `/serviceDetail?name=${record.name}&groupName=${record.groupName}`
+                            `/dataDictDetail?unicode=utf-8&type=${record.dataType}&code=${
+                              record.dataCode
+                            }`
                           )
                         }
                         style={{ marginRight: 5 }}

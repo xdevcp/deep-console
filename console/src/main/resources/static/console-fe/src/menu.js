@@ -228,6 +228,22 @@ module.exports = {
       registerName: 'cc.devcp.project.page.dataDictList',
       useRouter: false,
       id: 'dataDictList',
+      children: [
+        {
+          isExtend: true,
+          name: '导入详情',
+          title: '导入详情',
+          isVirtual: true,
+          projectName: 'app',
+          serviceName: 'dataDictDetail',
+          link: 'dataDictDetail',
+          hasFusion: true,
+          template: '',
+          registerName: 'cc.devcp.project.page.DataDictDetail',
+          useRouter: false,
+          id: 'dataDictDetail',
+        },
+      ],
     },
     {
       enable: true,

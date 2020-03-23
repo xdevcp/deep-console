@@ -57,8 +57,9 @@ public class DictionaryService {
             queryWrapper.eq("DIC_STATUS", status);
         }
         queryWrapper.ne("DIC_PARENT_ID", 0);
-        queryWrapper.orderByAsc("DIC_SORT_NO");
         queryWrapper.orderByDesc("DIC_UPDATE_TIME");
+        queryWrapper.orderByAsc("DIC_DATA_TYPE");
+        queryWrapper.orderByAsc("DIC_SORT_NO");
 
         PageInfo<DictionaryEntity> pageInfo = PageHelper.startPage(param.getCurrent(), param.getSize()).doSelectPageInfo(() -> {
             dictionaryMapper.selectList(queryWrapper);
@@ -88,6 +89,19 @@ public class DictionaryService {
         return ArrayResult.ok(list);
     }
 
+    public ResEntity details(String q, String w) {
+        QueryWrapper<DictionaryEntity> queryWrapper = new QueryWrapper<>();
+        if (!StrUtil.isBlankOrUndefined(q)) {
+            queryWrapper.eq("DIC_DATA_TYPE", q);
+        }
+        if (!StrUtil.isBlankOrUndefined(w)) {
+            queryWrapper.eq("DIC_DATA_CODE", w);
+        }
+        queryWrapper.last("LIMIT 1");
+        DictionaryEntity record = dictionaryMapper.selectOne(queryWrapper);
+        return ResEntity.ok(record);
+    }
+
     /**
      * <pre>
      *     description: 创建数据字典
@@ -102,8 +116,8 @@ public class DictionaryService {
         QueryWrapper<DictionaryEntity> queryWrapper = new QueryWrapper<>();
         if (dictionaryEntity.getParentId() == 0) {
             // 校验字典类型是否重复
-            queryWrapper.eq("DIC_DATA_TYPE", dictionaryEntity.getDataType())
-                .eq("DIC_PARENT_ID", dictionaryEntity.getParentId());
+            queryWrapper.eq("DIC_DATA_TYPE", dictionaryEntity.getDataType());
+            queryWrapper.eq("DIC_PARENT_ID", dictionaryEntity.getParentId());
             if (dictionaryMapper.selectOne(queryWrapper) != null) {
                 return ResEntity.fail(DicEnum.DIC_TYPE_EXITS);
             }
@@ -112,8 +126,8 @@ public class DictionaryService {
                 return ResEntity.fail(DicEnum.DIC_CODE_CANNOT_BE_NULL);
             }
             // 校验数据编码是否重复
-            queryWrapper.eq("DIC_DATA_CODE", dictionaryEntity.getDataCode())
-                .eq("DIC_PARENT_ID", dictionaryEntity.getParentId());
+            queryWrapper.eq("DIC_DATA_CODE", dictionaryEntity.getDataCode());
+            queryWrapper.eq("DIC_PARENT_ID", dictionaryEntity.getParentId());
             if (dictionaryMapper.selectOne(queryWrapper) != null) {
                 return ResEntity.fail(DicEnum.DIC_CODE_EXITS);
             }

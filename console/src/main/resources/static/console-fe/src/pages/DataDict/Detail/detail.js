@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { request } from '@/globalLib';
-import { Input, Button, Card, ConfigProvider, Form, Loading, Message } from '@alifd/next';
-import EditServiceDialog from './EditServiceDialog';
-import EditClusterDialog from './EditClusterDialog';
-import InstanceTable from './InstanceTable';
+import { Button, Input, ConfigProvider, Form, Loading, Message } from '@alifd/next';
+import EditDialog from './EditDialog';
 import { getParameter } from 'utils/nacosutil';
 import MonacoEditor from 'components/MonacoEditor';
 import { MONACO_READONLY_OPTIONS, METADATA_ENTER } from './constant';
-import './ServiceDetail.scss';
+import './Detail.scss';
 
 const FormItem = Form.Item;
 const pageFormLayout = {
@@ -17,8 +15,8 @@ const pageFormLayout = {
 };
 
 @ConfigProvider.config
-class ServiceDetail extends React.Component {
-  static displayName = 'ServiceDetail';
+class DataDictDetail extends React.Component {
+  static displayName = 'DataDictDetail';
 
   static propTypes = {
     locale: PropTypes.object,
@@ -28,35 +26,40 @@ class ServiceDetail extends React.Component {
 
   constructor(props) {
     super(props);
-    this.editServiceDialog = React.createRef();
-    this.editClusterDialog = React.createRef();
+    this.editDialog = React.createRef();
     this.state = {
-      serviceName: getParameter(props.location.search, 'name'),
-      groupName: getParameter(props.location.search, 'groupName'),
+      dataType: getParameter(props.location.search, 'type'),
+      dataCode: getParameter(props.location.search, 'code'),
       loading: false,
       currentPage: 1,
-      clusters: [],
       instances: {},
-      service: {},
+      source: {},
       pageSize: 10,
       pageNum: {},
     };
   }
 
   componentDidMount() {
-    if (!this.state.serviceName) {
+    if (!this.state.dataType) {
       this.props.history.goBack();
       return;
     }
-    this.getServiceDetail();
+    this.getDetail();
   }
 
-  getServiceDetail() {
-    const { serviceName, groupName } = this.state;
+  getDetail() {
+    const { dataType, dataCode } = this.state;
     request({
-      url: `v1/ns/catalog/service?serviceName=${serviceName}&groupName=${groupName}`,
+      url: `v1/open/details?unicode=utf-8&q=${dataType}&w=${dataCode}`,
       beforeSend: () => this.openLoading(),
-      success: ({ clusters = [], service = {} }) => this.setState({ service, clusters }),
+      success: res => {
+        if (res.success === true) {
+          const source = res.data || {};
+          this.setState({ source });
+        } else {
+          Message.error(res.errMsg);
+        }
+      },
       error: e => Message.error(e.responseText || 'error'),
       complete: () => this.closeLoading(),
     });
@@ -70,24 +73,20 @@ class ServiceDetail extends React.Component {
     this.setState({ loading: false });
   }
 
-  openEditServiceDialog() {
-    this.editServiceDialog.current.getInstance().show(this.state.service);
-  }
-
-  openClusterDialog(cluster) {
-    this.editClusterDialog.current.getInstance().show(cluster);
+  openEditDialog() {
+    this.editDialog.current.getInstance().show(this.state.source);
   }
 
   render() {
     const { locale = {} } = this.props;
-    const { serviceName, groupName, loading, service = {}, clusters } = this.state;
-    const { metadata = {}, selector = {} } = service;
+    const { loading, source = {} } = this.state;
+    const { metadata = {} } = source;
     let metadataText = '';
     if (Object.keys(metadata).length) {
       metadataText = JSON.stringify(metadata, null, '\t');
     }
     return (
-      <div className="main-container service-detail">
+      <div className="main-container main-detail">
         <Loading
           shape={'flower'}
           tip={'Loading...'}
@@ -101,7 +100,7 @@ class ServiceDetail extends React.Component {
               width: '100%',
             }}
           >
-            {locale.serviceDetails}
+            {locale.detailsTitle}
             <Button
               type="primary"
               className="header-btn"
@@ -109,79 +108,50 @@ class ServiceDetail extends React.Component {
             >
               {locale.back}
             </Button>
-            <Button
-              type="normal"
-              className="header-btn"
-              onClick={() => this.openEditServiceDialog()}
-            >
-              {locale.editService}
+            <Button type="normal" className="header-btn" onClick={() => this.openEditDialog()}>
+              {locale.edit}
             </Button>
           </h1>
 
           <Form {...pageFormLayout}>
-            <FormItem label={`${locale.serviceName}:`}>
-              <Input value={service.name} readOnly />
+            <FormItem label={`${locale.field1}:`}>
+              <Input value={source.dataType} readOnly />
             </FormItem>
-            <FormItem label={`${locale.groupName}:`}>
-              <Input value={service.groupName} readOnly />
+            <FormItem label={`${locale.field2}:`}>
+              <Input value={source.dataCode} readOnly />
             </FormItem>
-            <FormItem label={`${locale.protectThreshold}:`}>
-              <Input value={service.protectThreshold} readOnly />
+            <FormItem label={`${locale.field3}:`}>
+              <Input value={source.dataValue} readOnly />
             </FormItem>
-            <FormItem label={`${locale.metadata}:`}>
+            <FormItem label={`${locale.field4}:`}>
+              <Input value={source.sortNo} readOnly />
+            </FormItem>
+            <FormItem label={`${locale.field5}:`}>
+              <Input value={source.status} readOnly />
+            </FormItem>
+            <FormItem label={`${locale.field6}:`}>
+              <Input value={source.updateTime} readOnly />
+            </FormItem>
+            <FormItem label={`${locale.field7}:`}>
               <MonacoEditor
-                language="json"
+                language="text"
                 width={'100%'}
                 height={200}
-                value={metadataText}
+                value={source.dataDesc}
                 options={MONACO_READONLY_OPTIONS}
               />
             </FormItem>
-            <FormItem label={`${locale.type}:`}>
-              <Input value={selector.type} readOnly />
-            </FormItem>
-            {service.type === 'label' && (
-              <FormItem label={`${locale.selector}:`}>
-                <Input value={selector.selector} readOnly />
-              </FormItem>
-            )}
           </Form>
-          {clusters.map(cluster => (
-            <Card
-              key={cluster.name}
-              className="cluster-card"
-              title={`${locale.cluster}:`}
-              subTitle={cluster.name}
-              contentHeight="auto"
-              extra={
-                <Button type="normal" onClick={() => this.openClusterDialog(cluster)}>
-                  {locale.editCluster}
-                </Button>
-              }
-            >
-              <InstanceTable
-                clusterName={cluster.name}
-                serviceName={serviceName}
-                groupName={groupName}
-              />
-            </Card>
-          ))}
         </Loading>
-        <EditServiceDialog
-          ref={this.editServiceDialog}
+        <EditDialog
+          ref={this.editDialog}
           openLoading={() => this.openLoading()}
           closeLoading={() => this.closeLoading()}
-          getServiceDetail={() => this.getServiceDetail()}
-        />
-        <EditClusterDialog
-          ref={this.editClusterDialog}
-          openLoading={() => this.openLoading()}
-          closeLoading={() => this.closeLoading()}
-          getServiceDetail={() => this.getServiceDetail()}
+          getDetail={() => this.getDetail()}
         />
       </div>
     );
   }
 }
 
-export default ServiceDetail;
+export default DataDictDetail;

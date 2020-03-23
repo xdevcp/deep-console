@@ -20,8 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <pre>
+ *     description:
+ * </pre>
+ *
  * @author deep.wu
- * @version 1.0 on 2020/3/14
+ * @version 2020-03-23
  */
 @Slf4j
 @RestController
@@ -32,7 +36,6 @@ public class DictionaryController {
     @Autowired
     private DictionaryService dictionaryService;
 
-
     @ApiOperation(value = "查询数据字典")
     @GetMapping("/dict")
     public ResEntity queryDictionary(@RequestParam(required = false) Integer pageNo,
@@ -42,67 +45,43 @@ public class DictionaryController {
         return dictionaryService.queryDictionary(PageParam.of(pageNo, pageSize), dataType, status);
     }
 
-
     @ApiOperation(value = "查询数据类型")
     @GetMapping("/dataType")
     public ArrayResult queryDataType(@RequestParam(required = false) String q) {
         return dictionaryService.queryDataType(q);
     }
 
-    /**
-     * @param dictionaryEntity
-     * @return ResEntity
-     * @desc: 创建数据字典
-     * @date 2019/12/17 19:18
-     */
+    @ApiOperation(value = "查询详情")
+    @GetMapping("/details")
+    public ResEntity details(@RequestParam(required = false) String q,
+                             @RequestParam(required = false) String w) {
+        return dictionaryService.details(q, w);
+    }
+
     @ApiOperation(value = "createDictionary", notes = "创建数据字典")
-    @PostMapping("/dictionary")
+    @PostMapping("/dict")
     public ResEntity createDictionary(@RequestBody @Validated(Create.class) DictionaryEntity dictionaryEntity) {
         return dictionaryService.createDictionary(dictionaryEntity);
     }
 
-    /**
-     * @param dictionaryEntity
-     * @return ResEntity
-     * @desc: 修改数据字典
-     * @date 2019/12/19 16:47
-     */
     @ApiOperation(value = "modifyDictionary", notes = "修改数据字典")
-    @PatchMapping("/dictionary")
+    @PutMapping("/dict")
     public ResEntity modifyDictionary(@RequestBody @Validated(Modify.class) DictionaryEntity dictionaryEntity) {
         return dictionaryService.modifyDictionary(dictionaryEntity);
     }
 
-    /**
-     * @param childId
-     * @return ResEntity<Map < String, Object>>
-     * @desc: 查找父级id以及父级的值
-     * @date 2019/12/19 19:31
-     */
     @ApiOperation(value = "queryParentId", notes = "根据子级Id查找父级Id")
-    @GetMapping("/dictionary/getPid")
+    @GetMapping("/dict/getPid")
     public ResEntity<Map<String, Object>> queryParentId(@RequestParam String childId) {
         return dictionaryService.queryParentId(childId);
     }
 
-    /**
-     * @param ids
-     * @return ResEntity
-     * @desc: 批量删除数据字典(逻辑删除)
-     * @date 2019/12/23 15:04
-     */
     @ApiOperation(value = "removeDictionary", notes = "逻辑删除数据字典")
     @PatchMapping("/dictionary/batch/remove")
     public ResEntity removeDictionary(@RequestParam String[] ids) {
         return dictionaryService.removeDictionary(ids);
     }
 
-    /**
-     * @param dicType
-     * @return ResEntity
-     * @desc: 根据字典类型查询下一级数据
-     * @date 2019/12/17 19:16
-     */
     @ApiOperation(value = "findDictionaryByType", notes = "根据字典类型查询下一级数据")
     @GetMapping("/dictionary/type")
     public ResEntity<List<DictionaryEntity>> findDictionaryByType(@RequestParam String dicType) {

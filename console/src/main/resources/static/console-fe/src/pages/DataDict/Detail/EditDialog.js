@@ -6,8 +6,8 @@ import { DIALOG_FORM_LAYOUT, METADATA_SEPARATOR, METADATA_ENTER } from './consta
 import MonacoEditor from 'components/MonacoEditor';
 
 @ConfigProvider.config
-class EditDialog extends React.Component {
-  static displayName = 'EditDialog';
+class DataDictEditDialog extends React.Component {
+  static displayName = 'DataDictEditDialog';
 
   static propTypes = {
     queryDataDictList: PropTypes.func,
@@ -19,20 +19,20 @@ class EditDialog extends React.Component {
     super(props);
     this.state = {
       isCreate: false,
-      editDataDict: {},
+      editData: {},
       EditDialogVisible: false,
       errors: { name: {}, protectThreshold: {} },
     };
     this.show = this.show.bind(this);
   }
 
-  show(_editDataDict = {}) {
-    let editDataDict = _editDataDict;
-    const { metadata = {}, name } = editDataDict;
+  show(_editData = {}) {
+    let editData = _editData;
+    const { metadata = {}, name } = editData;
     if (Object.keys(metadata).length) {
-      editDataDict.metadataText = JSON.stringify(metadata, null, '\t');
+      editData.metadataText = JSON.stringify(metadata, null, '\t');
     }
-    this.setState({ editDataDict, EditDialogVisible: true, isCreate: !name });
+    this.setState({ editData, EditDialogVisible: true, isCreate: !name });
   }
 
   hide() {
@@ -43,7 +43,7 @@ class EditDialog extends React.Component {
     const { locale = {} } = this.props;
     const errors = Object.assign({}, this.state.errors);
     const helpMap = {
-      name: locale.dataDictNameRequired,
+      name: locale.fieldRequired,
       protectThreshold: locale.protectThresholdRequired,
     };
     if (field.protectThreshold === 0) {
@@ -61,18 +61,19 @@ class EditDialog extends React.Component {
 
   onConfirm() {
     const { isCreate } = this.state;
-    const editDataDict = Object.assign({}, this.state.editDataDict);
-    const { name, protectThreshold, groupName, metadataText = '', selector } = editDataDict;
+    const editData = Object.assign({}, this.state.editData);
+    const { name, protectThreshold, groupName, metadataText = '', selector } = editData;
     if (!this.validator({ name, protectThreshold })) return;
     request({
       method: isCreate ? 'POST' : 'PUT',
-      url: 'v1/ns/DataDict',
+      url: 'v1/open/dict',
       data: {
-        dataDictName: name,
-        groupName: groupName || 'DEFAULT_GROUP',
-        protectThreshold,
-        metadata: metadataText,
-        selector: JSON.stringify(selector),
+        dataType: name,
+        dataCode: groupName || 'DEFAULT_GROUP',
+        dataValue: metadataText,
+        dataDesc: name,
+        sortNo: JSON.stringify(selector),
+        status: 0,
       },
       dataType: 'text',
       beforeSend: () => this.setState({ loading: true }),
@@ -95,7 +96,7 @@ class EditDialog extends React.Component {
 
   onChangeCluster(changeVal) {
     const resetKey = ['name', 'protectThreshold'];
-    const { editDataDict = {} } = this.state;
+    const { editData = {} } = this.state;
     const errors = Object.assign({}, this.state.errors);
     resetKey.forEach(key => {
       if (changeVal[key]) {
@@ -104,7 +105,7 @@ class EditDialog extends React.Component {
       }
     });
     this.setState({
-      editDataDict: Object.assign({}, editDataDict, changeVal),
+      editData: Object.assign({}, editData, changeVal),
     });
   }
 
@@ -115,19 +116,19 @@ class EditDialog extends React.Component {
 
   render() {
     const { locale = {} } = this.props;
-    const { isCreate, editDataDict, EditDialogVisible, errors } = this.state;
+    const { isCreate, editData, EditDialogVisible, errors } = this.state;
     const {
       name,
       protectThreshold,
       groupName,
       metadataText,
       selector = { type: 'none' },
-    } = editDataDict;
+    } = editData;
     const formItemLayout = this.getFormItemLayout();
     return (
       <Dialog
-        className="DataDict-detail-edit-dialog"
-        title={isCreate ? locale.createDataDict : locale.updateDataDict}
+        className="main-detail-edit-dialog"
+        title={isCreate ? locale.create : locale.update}
         visible={EditDialogVisible}
         onOk={() => this.onConfirm()}
         onCancel={() => this.hide()}
@@ -137,7 +138,7 @@ class EditDialog extends React.Component {
           <Form.Item
             required={isCreate}
             {...formItemLayout}
-            label={`${locale.DataDictName}:`}
+            label={`${locale.field1}:`}
             {...errors.name}
           >
             {!isCreate ? (
@@ -165,7 +166,7 @@ class EditDialog extends React.Component {
               onChange={groupName => this.onChangeCluster({ groupName })}
             />
           </Form.Item>
-          <Form.Item label={`${locale.metadata}:`} {...formItemLayout}>
+          <Form.Item label={`${locale.dataDesc}:`} {...formItemLayout}>
             <MonacoEditor
               language="json"
               width={'100%'}
@@ -200,4 +201,4 @@ class EditDialog extends React.Component {
   }
 }
 
-export default EditDialog;
+export default DataDictEditDialog;

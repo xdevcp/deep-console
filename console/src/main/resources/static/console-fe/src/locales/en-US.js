@@ -1,3 +1,16 @@
+/*
+ * Copyright 1999-2018 Alibaba Group Holding Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 const I18N_CONF = {
   Header: {
     home: 'HOME',
@@ -18,7 +31,7 @@ const I18N_CONF = {
     invalidUsernameOrPassword: 'invalid username or password',
   },
   MainLayout: {
-    applicationName: 'APP',
+    nacosName: 'NACOS',
     doesNotExist: 'The page you visit does not exist',
     configurationManagementVirtual: 'ConfigManagement',
     configurationManagement: 'Configurations',
@@ -34,8 +47,13 @@ const I18N_CONF = {
     serviceManagement: 'Service List',
     subscriberList: 'Subscribers',
     serviceDetail: 'Service Details',
-    DataDictList: 'DataDicts',
     namespace: 'Namespace',
+    clusterManagementVirtual: 'ClusterManagement',
+    clusterManagement: 'Cluster Node List',
+    authorityControl: 'Authority Control',
+    userList: 'User List',
+    roleManagement: 'Role Management',
+    privilegeManagement: 'Privilege Management',
   },
   Password: {
     passwordNotConsistent: 'The passwords are not consistent',
@@ -98,19 +116,6 @@ const I18N_CONF = {
   },
   SubscriberList: {
     subscriberList: 'Subscriber List',
-    serviceName: 'Service Name',
-    serviceNamePlaceholder: 'Enter Service Name',
-    groupName: 'Group Name',
-    groupNamePlaceholder: 'Enter Group Name',
-    query: 'Search',
-    pubNoData: 'No results found.',
-    address: 'Address',
-    clientVersion: 'Client Version',
-    appName: 'Application Name',
-    searchServiceNamePrompt: 'Service name required!',
-  },
-  DataDictList: {
-    dataDictList: 'DataDict List',
     serviceName: 'Service Name',
     serviceNamePlaceholder: 'Enter Service Name',
     groupName: 'Group Name',
@@ -276,6 +281,7 @@ const I18N_CONF = {
     importSuccBegin: 'The import was successful,with ',
     importSuccEnd: 'configuration items imported',
     importFail: 'Import failed',
+    importFail403: 'Unauthorized!',
     importDataValidationError: 'No legitimate data was read, please check the imported data file.',
     metadataIllegal: 'The imported metadata file is illegal',
     namespaceNotExist: 'namespace does not exist',
@@ -503,6 +509,86 @@ const I18N_CONF = {
     rollbackDelete: 'Delete',
     update: 'Update',
     insert: 'Insert',
+  },
+  UserManagement: {
+    userManagement: 'User Management',
+    createUser: 'Create user',
+    resetPassword: 'Edit',
+    deleteUser: 'Delete',
+    deleteUserTip: 'Do you want to delete this user?',
+    username: 'Username',
+    password: 'Password',
+    operation: 'Operation',
+  },
+  NewUser: {
+    createUser: 'Create user',
+    username: 'Username',
+    password: 'Password',
+    rePassword: 'Repeat',
+    usernamePlaceholder: 'Please Enter Username',
+    passwordPlaceholder: 'Please Enter Password',
+    rePasswordPlaceholder: 'Please Enter Repeat Password',
+    usernameError: 'User name cannot be empty!',
+    passwordError: 'Password cannot be empty!',
+    rePasswordError: 'Repeat Password cannot be empty!',
+    rePasswordError2: 'Passwords are inconsistent!',
+  },
+  PasswordReset: {
+    resetPassword: 'Password Reset',
+    username: 'Username',
+    password: 'Password',
+    rePassword: 'Repeat',
+    passwordPlaceholder: 'Please Enter Password',
+    rePasswordPlaceholder: 'Please Enter Repeat Password',
+    passwordError: 'Password cannot be empty!',
+    rePasswordError: 'Repeat Password cannot be empty!',
+    rePasswordError2: 'Passwords are inconsistent!',
+  },
+  RolesManagement: {
+    roleManagement: 'Role management',
+    bindingRoles: 'Binding roles',
+    role: 'Role',
+    username: 'Username',
+    operation: 'Operation',
+    deleteRole: 'Delete',
+    deleteRoleTip: 'Do you want to delete this role?',
+  },
+  NewRole: {
+    bindingRoles: 'Binding roles',
+    username: 'Username',
+    role: 'Role',
+    usernamePlaceholder: 'Please Enter Username',
+    rolePlaceholder: 'Please Enter Role',
+    usernameError: 'User name cannot be empty!',
+    roleError: 'Role cannot be empty!',
+  },
+  PermissionsManagement: {
+    privilegeManagement: 'Permissions Management',
+    addPermission: 'Add Permission',
+    role: 'Role',
+    resource: 'Resource',
+    action: 'Action',
+    operation: 'Operation',
+    deletePermission: 'Delete',
+    deletePermissionTip: 'Do you want to delete this permission?',
+    readOnly: 'read only',
+    writeOnly: 'write only',
+    readWrite: 'Read and write',
+  },
+  NewPermissions: {
+    addPermission: 'Add Permission',
+    role: 'Role',
+    resource: 'Resource',
+    action: 'Action',
+    resourcePlaceholder: 'Please select resources',
+    rolePlaceholder: 'Please enter Role',
+    actionPlaceholder: 'Please select Action',
+    resourceError: 'Resource cannot be empty!',
+    roleError: 'Role cannot be empty!',
+    actionError: 'Action cannot be empty!',
+    readOnly: 'read only',
+    writeOnly: 'write only',
+    readWrite: 'Read and write',
   },
 };
 

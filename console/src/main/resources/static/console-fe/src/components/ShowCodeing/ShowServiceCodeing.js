@@ -1,3 +1,16 @@
+/*
+ * Copyright 1999-2018 Alibaba Group Holding Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getParams } from '../../globalLib';
@@ -76,28 +89,28 @@ class ShowServiceCodeing extends React.Component {
     return `/* Refer to document: https://github.com/alibaba/nacos/blob/master/example/src/main/java/com/alibaba/nacos/example
 *  pom.xml
     <dependency>
-        <groupId>cc.devcp.project</groupId>
+        <groupId>com.alibaba.nacos</groupId>
         <artifactId>nacos-client</artifactId>
         <version>$\{latest.version}</version>
     </dependency>
 */
-package cc.devcp.project.example;
+package com.alibaba.nacos.example;
 
 import java.util.Properties;
 
-import cc.devcp.common.exception.GlobalException;
-import cc.devcp.project.api.naming.NamingFactory;
-import cc.devcp.project.api.naming.NamingService;
-import cc.devcp.project.api.naming.listener.Event;
-import cc.devcp.project.api.naming.listener.EventListener;
-import cc.devcp.project.api.naming.listener.NamingEvent;
+import com.alibaba.nacos.api.exception.NacosException;
+import com.alibaba.nacos.api.naming.NamingFactory;
+import com.alibaba.nacos.api.naming.NamingService;
+import com.alibaba.nacos.api.naming.listener.Event;
+import com.alibaba.nacos.api.naming.listener.EventListener;
+import com.alibaba.nacos.api.naming.listener.NamingEvent;
 
 /**
  * @author nkorange
  */
 public class NamingExample {
 
-    public static void main(String[] args) throws GlobalException {
+    public static void main(String[] args) throws NacosException {
 
         Properties properties = new Properties();
         properties.setProperty("serverAddr", System.getProperty("serverAddr"));
@@ -130,17 +143,17 @@ public class NamingExample {
     return `/* Refer to document: https://github.com/nacos-group/nacos-examples/tree/master/nacos-spring-example/nacos-spring-discovery-example
 *  pom.xml
     <dependency>
-        <groupId>cc.devcp.project</groupId>
+        <groupId>com.alibaba.nacos</groupId>
         <artifactId>nacos-spring-context</artifactId>
         <version>\${latest.version}</version>
     </dependency>
 */
 
 // Refer to document:  https://github.com/nacos-group/nacos-examples/blob/master/nacos-spring-example/nacos-spring-discovery-example/src/main/java/com/alibaba/nacos/example/spring
-package cc.devcp.project.example.spring;
+package com.alibaba.nacos.example.spring;
 
-import cc.devcp.project.api.annotation.NacosProperties;
-import cc.devcp.project.spring.context.annotation.discovery.EnableNacosDiscovery;
+import com.alibaba.nacos.api.annotation.NacosProperties;
+import com.alibaba.nacos.spring.context.annotation.discovery.EnableNacosDiscovery;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -150,12 +163,12 @@ public class NacosConfiguration {
 }
 
 // Refer to document: https://github.com/nacos-group/nacos-examples/tree/master/nacos-spring-example/nacos-spring-discovery-example/src/main/java/com/alibaba/nacos/example/spring/controller
-package cc.devcp.project.example.spring.controller;
+package com.alibaba.nacos.example.spring.controller;
 
-import cc.devcp.project.api.annotation.NacosInjected;
-import cc.devcp.common.exception.GlobalException;
-import cc.devcp.project.api.naming.NamingService;
-import cc.devcp.project.api.naming.pojo.Instance;
+import com.alibaba.nacos.api.annotation.NacosInjected;
+import com.alibaba.nacos.api.exception.NacosException;
+import com.alibaba.nacos.api.naming.NamingService;
+import com.alibaba.nacos.api.naming.pojo.Instance;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -174,7 +187,7 @@ public class DiscoveryController {
 
     @RequestMapping(value = "/get", method = GET)
     @ResponseBody
-    public List<Instance> get(@RequestParam String serviceName) throws GlobalException {
+    public List<Instance> get(@RequestParam String serviceName) throws NacosException {
         return namingService.getAllInstances(serviceName);
     }
 }`;
@@ -195,12 +208,12 @@ public class DiscoveryController {
 */    
 // Refer to document: https://github.com/nacos-group/nacos-examples/blob/master/nacos-spring-boot-example/nacos-spring-boot-discovery-example/src/main/java/com/alibaba/nacos/example/spring/boot/controller
 
-package cc.devcp.project.example.spring.boot.controller;
+package com.alibaba.nacos.example.spring.boot.controller;
 
-import cc.devcp.project.api.annotation.NacosInjected;
-import cc.devcp.common.exception.GlobalException;
-import cc.devcp.project.api.naming.NamingService;
-import cc.devcp.project.api.naming.pojo.Instance;
+import com.alibaba.nacos.api.annotation.NacosInjected;
+import com.alibaba.nacos.api.exception.NacosException;
+import com.alibaba.nacos.api.naming.NamingService;
+import com.alibaba.nacos.api.naming.pojo.Instance;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -219,7 +232,7 @@ public class DiscoveryController {
 
     @RequestMapping(value = "/get", method = GET)
     @ResponseBody
-    public List<Instance> get(@RequestParam String serviceName) throws GlobalException {
+    public List<Instance> get(@RequestParam String serviceName) throws NacosException {
         return namingService.getAllInstances(serviceName);
     }
 }`;
@@ -245,7 +258,7 @@ spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
 */    
 
 // Refer to document: https://github.com/nacos-group/nacos-examples/tree/master/nacos-spring-cloud-example/nacos-spring-cloud-discovery-example/nacos-spring-cloud-provider-example/src/main/java/com/alibaba/nacos/example/spring/cloud
-package cc.devcp.project.example.spring.cloud;
+package com.alibaba.nacos.example.spring.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -284,7 +297,7 @@ spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
 */    
 
 // Refer to document: https://github.com/nacos-group/nacos-examples/tree/master/nacos-spring-cloud-example/nacos-spring-cloud-discovery-example/nacos-spring-cloud-consumer-example/src/main/java/com/alibaba/nacos/example/spring/cloud
-package cc.devcp.project.example.spring.cloud;
+package com.alibaba.nacos.example.spring.cloud;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;

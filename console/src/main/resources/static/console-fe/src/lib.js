@@ -1,3 +1,15 @@
+/*
+ * Copyright 1999-2018 Alibaba Group Holding Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import { getParams, request, aliwareIntl } from './globalLib';
 
 let hasAlert = false;
@@ -68,7 +80,7 @@ request.middleWare((_config = {}) => {
       window.Dialog.alert({
         language: aliwareIntl.currentLanguageCode || 'zh-cn',
         style: { width: 400 },
-        content: aliwareIntl.get('cc.devcp.project.pubshow'), // '子账号没有权限，请联系主账号负责人RAM上授权',
+        content: aliwareIntl.get('com.alibaba.nacos.pubshow'), // '子账号没有权限，请联系主账号负责人RAM上授权',
         onOk: () => {
           hasAlert = false;
         },
@@ -108,7 +120,11 @@ window.require(['vs/editor/editor.main'], () => {
   // Register a tokens provider for the language
   window.monaco.languages.setMonarchTokensProvider('properties', {
     tokenizer: {
-      root: [[/^\#.*/, 'comment'], [/.*\=/, 'key'], [/^=.*/, 'value']],
+      root: [
+        [/^\#.*/, 'comment'],
+        [/.*\=/, 'key'],
+        [/^=.*/, 'value'],
+      ],
     },
   });
 
@@ -160,7 +176,7 @@ window.importEditor = callback => {
 window._getLink = (function() {
   const _linkObj = {};
   // request({
-  //     url: "cc.devcp.project.service.getLinks",
+  //     url: "com.alibaba.nacos.service.getLinks",
   //     async: false,
   //     data: {},
   //     success: res => {

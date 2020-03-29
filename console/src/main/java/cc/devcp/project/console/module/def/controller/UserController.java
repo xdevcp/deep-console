@@ -1,5 +1,7 @@
 package cc.devcp.project.console.module.def.controller;
 
+import cc.devcp.project.config.server.auth.RoleInfo;
+import cc.devcp.project.console.security.roles.AppRoleServiceImpl;
 import cc.devcp.project.core.auth.*;
 import com.alibaba.fastjson.JSONObject;
 import cc.devcp.project.common.constant.CommonConst;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * User related methods entry
@@ -41,6 +44,9 @@ public class UserController {
 
     @Autowired
     private AppUserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private AppRoleServiceImpl roleService;
 
     @Autowired
     private AuthConfigs authConfigs;
@@ -79,7 +85,14 @@ public class UserController {
     @DeleteMapping
     @Secured(resource = AppAuthConfig.CONSOLE_RESOURCE_NAME_PREFIX + "users", action = ActionTypes.WRITE)
     public Object deleteUser(@RequestParam String username) {
-
+        List<RoleInfo> roleInfoList = roleService.getRoles(username);
+        if (roleInfoList != null) {
+            for (RoleInfo roleInfo : roleInfoList) {
+                if (roleInfo.getRole().equals(AppRoleServiceImpl.GLOBAL_ADMIN_ROLE)) {
+                    throw new IllegalArgumentException("cannot delete admin: " + username);
+                }
+            }
+        }
         userDetailsService.deleteUser(username);
         return new RestResult<>(200, "delete user ok!");
     }

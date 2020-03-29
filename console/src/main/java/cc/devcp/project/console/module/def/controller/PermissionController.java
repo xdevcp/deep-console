@@ -1,6 +1,7 @@
 package cc.devcp.project.console.module.def.controller;
 
 
+import cc.devcp.project.common.model.page.PageParam;
 import cc.devcp.project.common.model.result.RestResult;
 import cc.devcp.project.console.security.AppAuthConfig;
 import cc.devcp.project.console.security.roles.AppRoleServiceImpl;
@@ -34,9 +35,11 @@ public class PermissionController {
      */
     @GetMapping
     @Secured(resource = AppAuthConfig.CONSOLE_RESOURCE_NAME_PREFIX + "permissions", action = ActionTypes.READ)
-    public Object getPermissions(@RequestParam int pageNo, @RequestParam int pageSize,
+    public Object getPermissions(@RequestParam(required = false) Integer pageNo,
+                                 @RequestParam(required = false) Integer pageSize,
                                  @RequestParam(name = "role", defaultValue = StringUtils.EMPTY) String role) {
-        return nacosRoleService.getPermissionsFromDatabase(role, pageNo, pageSize);
+        PageParam pageParam = PageParam.of(pageNo, pageSize);
+        return nacosRoleService.getPermissionsFromDatabase(role, pageParam);
     }
 
     /**

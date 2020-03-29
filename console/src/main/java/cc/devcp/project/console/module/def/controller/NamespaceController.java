@@ -1,10 +1,15 @@
 package cc.devcp.project.console.module.def.controller;
 
+import cc.devcp.project.common.model.page.PageParam;
 import cc.devcp.project.common.model.result.RestResult;
 import cc.devcp.project.config.server.model.TenantInfo;
 import cc.devcp.project.config.server.service.PersistService;
 import cc.devcp.project.console.model.Namespace;
 import cc.devcp.project.console.model.NamespaceAllInfo;
+import cc.devcp.project.console.security.AppAuthConfig;
+import cc.devcp.project.console.security.roles.AppRoleServiceImpl;
+import cc.devcp.project.core.auth.ActionTypes;
+import cc.devcp.project.core.auth.Secured;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -91,6 +96,7 @@ public class NamespaceController {
      * @return whether create ok
      */
     @PostMapping
+    @Secured(resource = AppAuthConfig.CONSOLE_RESOURCE_NAME_PREFIX + "namespaces", action = ActionTypes.WRITE)
     public Boolean createNamespace(HttpServletRequest request, HttpServletResponse response,
                                    @RequestParam("customNamespaceId") String namespaceId,
                                    @RequestParam("namespaceName") String namespaceName,
@@ -139,6 +145,7 @@ public class NamespaceController {
      * @return whether edit ok
      */
     @PutMapping
+    @Secured(resource = AppAuthConfig.CONSOLE_RESOURCE_NAME_PREFIX + "namespaces", action = ActionTypes.WRITE)
     public Boolean editNamespace(@RequestParam("namespace") String namespace,
                                  @RequestParam("namespaceShowName") String namespaceShowName,
                                  @RequestParam(value = "namespaceDesc", required = false) String namespaceDesc) {
@@ -156,6 +163,7 @@ public class NamespaceController {
      * @return whether del ok
      */
     @DeleteMapping
+    @Secured(resource = AppAuthConfig.CONSOLE_RESOURCE_NAME_PREFIX + "namespaces", action = ActionTypes.WRITE)
     public Boolean deleteConfig(HttpServletRequest request, HttpServletResponse response,
                                 @RequestParam("namespaceId") String namespaceId) {
         persistService.removeTenantInfoAtomic("1", namespaceId);

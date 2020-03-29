@@ -66,12 +66,15 @@ public class AppAuthManager implements AuthManager {
         user.setUserName(username);
         user.setToken(token);
         List<RoleInfo> roleInfoList = roleService.getRoles(username);
-        for (RoleInfo roleInfo : roleInfoList) {
-            if (roleInfo.getRole().equals(AppRoleServiceImpl.GLOBAL_ADMIN_ROLE)) {
-                user.setGlobalAdmin(true);
-                break;
+        if (roleInfoList != null) {
+            for (RoleInfo roleInfo : roleInfoList) {
+                if (roleInfo.getRole().equals(AppRoleServiceImpl.GLOBAL_ADMIN_ROLE)) {
+                    user.setGlobalAdmin(true);
+                    break;
+                }
             }
         }
+
         return user;
     }
 

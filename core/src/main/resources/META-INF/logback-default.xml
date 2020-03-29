@@ -104,6 +104,11 @@
         <level value="INFO"/>
     </logger>
 
+    <logger name="cc.devcp.project.core">
+        <appender-ref ref="stdoutAppender"/>
+        <level value="trace"/>
+    </logger>
+
     <logger name="cc.devcp.project.console">
         <appender-ref ref="stdoutAppender"/>
         <level value="debug"/>

@@ -193,4 +193,4 @@ CREATE TABLE permissions (
 
 INSERT INTO users (username, password, enabled) VALUES ('admin', '$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu', TRUE);
 
-INSERT INTO roles (username, role) VALUES ('admin', 'GLOBAL_ADMIN');
+INSERT INTO roles (username, role) VALUES ('admin', 'ROLE_ADMIN');

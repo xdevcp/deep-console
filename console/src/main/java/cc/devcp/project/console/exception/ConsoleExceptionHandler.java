@@ -1,6 +1,6 @@
 package cc.devcp.project.console.exception;
 
-import cc.devcp.project.core.auth.AccessException;
+import cc.devcp.project.auth.security.auth.AccessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

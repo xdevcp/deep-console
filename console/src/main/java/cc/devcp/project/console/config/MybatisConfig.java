@@ -1,7 +1,7 @@
 package cc.devcp.project.console.config;
 
-import cc.devcp.project.config.server.service.DataSourceService;
-import cc.devcp.project.config.server.service.DynamicDataSource;
+import cc.devcp.project.provider.service.DataSourceService;
+import cc.devcp.project.provider.service.DynamicDataSource;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,9 +14,12 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 /**
- * @version 1.0.0
- * @author: lzy
- * @date: 2019/11/13 10:44
+ * <pre>
+ *     description:
+ * </pre>
+ *
+ * @author deep.wu
+ * @version 2020-03-29
  */
 @MapperScan({"cc.devcp.project.**.mapper"})
 @EnableTransactionManagement

@@ -22,11 +22,11 @@
 
     <profiles>
         <profile>
-            <id>release-config</id>
+            <id>release-provider</id>
             <dependencies>
                 <dependency>
                     <groupId>cc.devcp.project</groupId>
-                    <artifactId>deep-config</artifactId>
+                    <artifactId>deep-provider</artifactId>
                 </dependency>
             </dependencies>
             <build>
@@ -35,14 +35,14 @@
                         <artifactId>maven-assembly-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>release-config</id>
+                                <id>release-provider</id>
                                 <goals>
                                     <goal>single</goal>
                                 </goals>
                                 <phase>package</phase>
                                 <configuration>
                                     <descriptors>
-                                        <descriptor>release-config.xml</descriptor>
+                                        <descriptor>release-provider.xml</descriptor>
                                     </descriptors>
                                     <appendAssemblyId>false</appendAssemblyId>
                                 </configuration>

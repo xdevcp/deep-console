@@ -1,7 +1,7 @@
 package cc.devcp.project.console.config;
 
 
-import cc.devcp.project.core.code.ControllerMethodsCache;
+import cc.devcp.project.core.ControllerMethodsCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
@@ -28,8 +28,9 @@ public class ConsoleConfig {
 
     @PostConstruct
     public void init() {
+        methodsCache.initClassMethod("cc.devcp.project.auth.controller");
         methodsCache.initClassMethod("cc.devcp.project.console.*.controller");
-        methodsCache.initClassMethod("cc.devcp.project.config.server.controller");
+        methodsCache.initClassMethod("cc.devcp.project.provider.controller");
     }
 
     @Bean

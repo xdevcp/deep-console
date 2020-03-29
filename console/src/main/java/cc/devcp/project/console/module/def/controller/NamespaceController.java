@@ -1,15 +1,13 @@
 package cc.devcp.project.console.module.def.controller;
 
-import cc.devcp.project.common.model.page.PageParam;
+import cc.devcp.project.auth.security.AppAuthConfig;
+import cc.devcp.project.auth.security.auth.ActionTypes;
+import cc.devcp.project.auth.security.auth.Secured;
 import cc.devcp.project.common.model.result.RestResult;
-import cc.devcp.project.config.server.model.TenantInfo;
-import cc.devcp.project.config.server.service.PersistService;
+import cc.devcp.project.provider.model.TenantInfo;
+import cc.devcp.project.provider.service.PersistService;
 import cc.devcp.project.console.model.Namespace;
 import cc.devcp.project.console.model.NamespaceAllInfo;
-import cc.devcp.project.console.security.AppAuthConfig;
-import cc.devcp.project.console.security.roles.AppRoleServiceImpl;
-import cc.devcp.project.core.auth.ActionTypes;
-import cc.devcp.project.core.auth.Secured;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -282,10 +282,12 @@
 
     <!-- 子模块管理 -->
     <modules>
-        <module>common</module>
-        <module>config</module>
-        <module>console</module>
         <module>core</module>
+        <module>common</module>
+        <module>provider</module>
+        <module>auth</module>
+        <module>upload</module>
+        <module>console</module>
         <module>distribution</module>
         <module>test</module>
     </modules>
@@ -314,17 +316,32 @@
             <!-- Internal libs -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>deep-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>deep-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>deep-config</artifactId>
+                <artifactId>deep-provider</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>${project.groupId}</groupId>-->
+<!--                <artifactId>deep-config</artifactId>-->
+<!--                <version>${project.version}</version>-->
+<!--            </dependency>-->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>deep-auth</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>deep-core</artifactId>
+                <artifactId>deep-upload</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

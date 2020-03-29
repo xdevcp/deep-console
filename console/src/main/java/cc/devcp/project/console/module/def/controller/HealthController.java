@@ -1,6 +1,6 @@
 package cc.devcp.project.console.module.def.controller;
 
-import cc.devcp.project.config.server.service.PersistService;
+import cc.devcp.project.provider.service.PersistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

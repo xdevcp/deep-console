@@ -30,10 +30,6 @@ public class UploadUtils extends JschUtil {
      * @throws SftpException
      */
     public static String upload(MultipartFile file, String fileName, String packageName, UploadProps props) throws IOException, SftpException {
-//        String classPath = PathUtil.instance();
-//        log.info("-----classPath : {}", classPath);
-//        String sshKeyFilePath = classPath + props.getKey();
-//        log.info("sshKeyFilePath : {}", sshKeyFilePath);
         Session session = getSession(props.getHost(), props.getPort(), props.getUsername(), props.getKey(), (byte[]) null);
         ChannelSftp channelSftp = getSftp(session);
         existsDir(channelSftp, props.getPath() + packageName);
@@ -56,10 +52,6 @@ public class UploadUtils extends JschUtil {
      * @throws SftpException
      */
     public static String upload(File file, String fileName, String packageName, UploadProps props) throws IOException, SftpException {
-//        String classPath = PathUtil.instance();
-//        log.info("-----classPath : {}", classPath);
-//        String sshKeyFilePath = classPath + props.getKey();
-//        log.info("sshKeyFilePath : {}", sshKeyFilePath);
         Session session = getSession(props.getHost(), props.getPort(), props.getUsername(), props.getKey(), (byte[]) null);
         ChannelSftp channelSftp = getSftp(session);
         existsDir(channelSftp, props.getPath() + packageName);
@@ -83,10 +75,6 @@ public class UploadUtils extends JschUtil {
      * @throws SftpException
      */
     public static String upload(ByteArrayOutputStream outputStream, String fileName, String packageName, UploadProps props) throws IOException, SftpException {
-//        String classPath = PathUtil.instance();
-//        log.info("-----classPath : {}", classPath);
-//        String sshKeyFilePath = classPath + props.getKey();
-//        log.info("sshKeyFilePath : {}", sshKeyFilePath);
         Session session = getSession(props.getHost(), props.getPort(), props.getUsername(), props.getKey(), (byte[]) null);
         ChannelSftp channelSftp = getSftp(session);
         existsDir(channelSftp, props.getPath() + packageName);

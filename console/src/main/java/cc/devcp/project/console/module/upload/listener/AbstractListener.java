@@ -12,8 +12,8 @@ import java.util.List;
  */
 public abstract class AbstractListener<S, T> extends AnalysisEventListener<S> {
 
-    protected final static int batchSize = 1000;
+    protected final static int BATCH_SIZE = 1000;
     protected int insertSize = 0;
-    protected List<T> dataList =  new ArrayList<>();
+    protected List<T> dataList = new ArrayList<>();
 
 }

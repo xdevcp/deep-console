@@ -9,11 +9,15 @@ public interface CommEnum<T> {
 
     /**
      * Code可以是Int，String......(保存在数据库的值)
+     *
+     * @return
      */
     T getCode();
 
     /**
      * Content String（前端显示的值）
+     *
+     * @return
      */
     String getContent();
 

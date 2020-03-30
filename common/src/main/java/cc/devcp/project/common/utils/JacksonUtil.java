@@ -41,9 +41,9 @@ public class JacksonUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(JacksonUtil.class);
 
-    public static final String pattern = "yyyy-MM-dd HH:mm:ss";
+    public static final String PATTERN = "yyyy-MM-dd HH:mm:ss";
 
-    public static final String timeZone = "GMT+8";
+    public static final String TIME_ZONE = "GMT+8";
 
     public static ObjectMapper objectMapper;
 
@@ -54,9 +54,9 @@ public class JacksonUtil {
         //小写驼峰
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
         //东八时区
-        objectMapper.setTimeZone(TimeZone.getTimeZone(timeZone));
+        objectMapper.setTimeZone(TimeZone.getTimeZone(TIME_ZONE));
         //时间格式
-        objectMapper.setDateFormat(new SimpleDateFormat(pattern));
+        objectMapper.setDateFormat(new SimpleDateFormat(PATTERN));
         //关闭以timestamps输出
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         //关闭未知属性失败
@@ -70,12 +70,12 @@ public class JacksonUtil {
         // 允许出现特殊字符和转义符
         objectMapper.configure(JsonParser.Feature.ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER, true);
         JavaTimeModule javaTimeModule = new JavaTimeModule();
-        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(pattern)));
-        javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(pattern.split(" ")[0])));
-        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(pattern.split(" ")[1])));
-        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(pattern)));
-        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(pattern.split(" ")[0])));
-        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(pattern.split(" ")[1])));
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(PATTERN)));
+        javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(PATTERN.split(" ")[0])));
+        javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(PATTERN.split(" ")[1])));
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(PATTERN)));
+        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(PATTERN.split(" ")[0])));
+        javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(PATTERN.split(" ")[1])));
         objectMapper.registerModule(javaTimeModule);
         objectMapper.registerModule(new ParameterNamesModule());
         objectMapper.registerModule(new Jdk8Module());

@@ -77,9 +77,6 @@ public class UploadService {
             if (StatusEnum.Finished.name().equals(item.getStatus())) {
                 item.setResult(String.format(FORMAT_FINISHED_RESULT, item.getNumberAll(), item.getNumberValid(), item.getNumberInvalid()));
             }
-//            if(0 == item.getNumberAll()){
-//                item.setResult("正在导入，请耐心等待");
-//            }
             TypeEnum typeEnum = TypeEnum.valueOf(item.getType());
             item.setType(typeEnum.getContent());
             StatusEnum statusEnum = StatusEnum.valueOf(item.getStatus());

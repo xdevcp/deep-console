@@ -35,7 +35,7 @@ public class CustomerTagDataListener extends AbstractListener<CustomerTagData, L
         customerTempEntity.setCellphone(vehicleTagData.getCellphone());
         customerTempEntity.setCustomerLabel(vehicleTagData.getCustomerTag().replace("，", ","));
         dataList.add(customerTempEntity);
-        if (dataList.size() >= batchSize) {
+        if (dataList.size() >= BATCH_SIZE) {
             loadCustomerTempService.createBatch(dataList);
             insertSize += dataList.size();
             log.info("已处理:{}", insertSize);

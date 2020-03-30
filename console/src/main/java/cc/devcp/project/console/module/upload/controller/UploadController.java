@@ -28,6 +28,8 @@ import java.io.IOException;
 @Api(tags = "自定义上传")
 public class UploadController {
 
+    public static final String PATTERN = "^.*(xlsx|XLSX)$";
+
     @Autowired
     private UploadService uploadService;
 
@@ -44,7 +46,7 @@ public class UploadController {
     @PostMapping(value = "/customer/tag", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResEntity uploadCustomerTag(String dealerId,
                                        @RequestPart("excel") MultipartFile excel) throws IOException, SftpException {
-        if (!excel.getOriginalFilename().matches("^.*(xlsx|XLSX)$")) {
+        if (!excel.getOriginalFilename().matches(PATTERN)) {
             return ResEntity.fail(ResEnum.EXCEL_TYPE_ERROR);
         }
         uploadService.uploadCustomerTag(dealerId, excel);

@@ -8,7 +8,9 @@ import cc.devcp.project.common.enums.CommEnum;
  * @date: 2020/1/9 15:55
  */
 public enum ResEnum implements CommEnum<Integer> {
-
+    /**
+     * ResEnum
+     */
     EXCEL_TYPE_ERROR(40001, "非法的文件名称"),
     EXCEL_CONTENT_ERROR(40002, "文件内容为空"),
     ACCOUNT_SERVER_ERROR(50000, "用户服务不可用"),
@@ -19,7 +21,7 @@ public enum ResEnum implements CommEnum<Integer> {
 
     private String content;
 
-    ResEnum(Integer code, String content){
+    ResEnum(Integer code, String content) {
         this.code = code;
         this.content = content;
     }

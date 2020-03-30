@@ -101,7 +101,7 @@ public class PropertyUtil {
             setCorrectUsageDelay(getInt("correctUsageDelay", correctUsageDelay));
             setInitialExpansionPercent(getInt("initialExpansionPercent", initialExpansionPercent));
             String platform = getString("spring.datasource.platform", "");
-            setStandaloneUseMysql(platform.equals(MYSQL_PROPERTY_KEY));
+            setStandaloneUseMysql(MYSQL_PROPERTY_KEY.equals(platform));
         } catch (Exception e) {
             logger.error("read application.properties failed", e);
         }

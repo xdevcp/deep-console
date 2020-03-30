@@ -7,6 +7,8 @@ import java.io.File;
  */
 public class PathUtil {
 
+    public static final String JAR = ".jar";
+
     public static String instance() {
         // 开发环境下
         String path = System.getProperty("user.dir");
@@ -14,7 +16,7 @@ public class PathUtil {
         if (classPath.indexOf(File.pathSeparator) < 0) {
             File f = new File(classPath);
             classPath = f.getAbsolutePath();
-            if (classPath.endsWith(".jar")) {
+            if (classPath.endsWith(JAR)) {
                 // 使用环境下
                 path = classPath.substring(0, classPath.lastIndexOf(File.separator));
             }

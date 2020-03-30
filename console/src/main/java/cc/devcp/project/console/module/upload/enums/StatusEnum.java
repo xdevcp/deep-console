@@ -6,19 +6,21 @@ package cc.devcp.project.console.module.upload.enums;
  * @date: 2020/1/8 15:24
  */
 public enum StatusEnum {
+    /**
+     * StatusEnum
+     */
+    Started("已创建任务"),
+    Processing("导入中"),
+    Finished("已完成"),
+    ;
 
-        Started("已创建任务"),
-        Processing("导入中"),
-        Finished("已完成"),
-        ;
+    private String content;
 
-        private String content;
+    StatusEnum(String content) {
+        this.content = content;
+    }
 
-        StatusEnum(String content){
-                this.content = content;
-        }
-
-        public String getContent() {
-                return content;
-        }
+    public String getContent() {
+        return content;
+    }
 }

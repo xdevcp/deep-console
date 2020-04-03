@@ -1,3 +1,7 @@
+/*
+ * @Author: deep.ng
+ * @Date: 2020-03-30 09:50:18
+ */
 import { isJsonString } from '../utils/nacosutil';
 
 const configurationMenu = {
@@ -63,6 +67,19 @@ export default function(model) {
         {
           key: 'clusterManagement',
           url: '/clusterManagement',
+        },
+      ],
+    },
+    {
+      key: 'serviceManagementVirtual',
+      children: [
+        {
+          key: 'serviceManagement',
+          url: '/serviceManagement',
+        },
+        {
+          key: 'subscriberList',
+          url: '/subscriberList',
         },
       ],
     },

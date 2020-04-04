@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+  <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="app"/>
+  <springProperty scope="context" name="logPath" source="all.logs.path" defaultValue="${user.home}/.${appName}/logs"/>
+  <property name="LOG_HOME" value="${logPath}"/>
+
+    <appender name="module_console"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/module_console.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/module_console.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxFileSize>2GB</maxFileSize>
+            <MaxHistory>7</MaxHistory>
+            <totalSizeCap>7GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%date %level %msg%n%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="cc.devcp.project.console" additivity="false">
+        <appender-ref ref="module_console"/>
+        <level value="DEBUG"/>
+    </logger>
+
+</included>

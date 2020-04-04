@@ -1,8 +1,8 @@
 package cc.devcp.project.provider.controller;
 
+import cc.devcp.project.common.model.page.Page;
 import cc.devcp.project.provider.constant.Constants;
 import cc.devcp.project.provider.model.ConfigHistoryInfo;
-import cc.devcp.project.provider.model.Page;
 import cc.devcp.project.provider.service.PersistService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package cc.devcp.project.common.constant;
 
 /**
- * Constant 路由规范
+ * Constant 全局路由
  *
  * @author deep
  */
@@ -25,5 +25,10 @@ public interface GlobalRouter {
     /**
      * 测试
      */
-    String TEST = "/test";
+    String OPEN_TEST = OPEN + "/test";
+
+    /**
+     * 运维
+     */
+    String OPEN_OPS = OPEN + "/ops";
 }

@@ -1,12 +1,10 @@
 package cc.devcp.project.provider.utils;
 
-import cc.devcp.project.provider.model.Page;
+import cc.devcp.project.common.model.page.Page;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.util.List;
-
-import static cc.devcp.project.core.utils.SystemUtils.STANDALONE_MODE;
 
 /**
  * 分页辅助类

@@ -1,6 +1,6 @@
 package cc.devcp.project.auth.server.auth;
 
-import cc.devcp.project.provider.model.Page;
+import cc.devcp.project.common.model.page.Page;
 import cc.devcp.project.provider.service.PersistService;
 import cc.devcp.project.provider.utils.PaginationHelper;
 import org.apache.commons.lang3.StringUtils;

@@ -1,7 +1,8 @@
 package cc.devcp.project.provider.service;
 
 import cc.devcp.project.common.exception.GlobalException;
-import cc.devcp.project.provider.enums.FileTypeEnum;
+import cc.devcp.project.common.model.page.Page;
+import cc.devcp.project.common.enums.FileTypeEnum;
 import cc.devcp.project.provider.model.*;
 import cc.devcp.project.provider.utils.LogUtil;
 import cc.devcp.project.provider.utils.MD5;
@@ -10,7 +11,7 @@ import cc.devcp.project.provider.utils.ParamUtils;
 import cc.devcp.project.provider.utils.event.EventDispatcher;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;

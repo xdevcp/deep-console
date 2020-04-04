@@ -4,7 +4,7 @@ import cc.devcp.project.provider.manager.TaskManager;
 import cc.devcp.project.provider.model.ConfigInfo;
 import cc.devcp.project.provider.model.ConfigInfoAggr;
 import cc.devcp.project.provider.model.ConfigInfoChanged;
-import cc.devcp.project.provider.model.Page;
+import cc.devcp.project.common.model.page.Page;
 import cc.devcp.project.provider.service.PersistService;
 import cc.devcp.project.provider.utils.ContentUtils;
 import cc.devcp.project.provider.utils.TimeUtils;

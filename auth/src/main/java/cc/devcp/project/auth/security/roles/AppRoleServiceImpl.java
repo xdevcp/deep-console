@@ -3,6 +3,7 @@ package cc.devcp.project.auth.security.roles;
 
 import cc.devcp.project.auth.security.auth.AuthConfigs;
 import cc.devcp.project.auth.security.auth.Permission;
+import cc.devcp.project.common.model.page.Page;
 import cc.devcp.project.common.model.page.PageParam;
 import cc.devcp.project.auth.server.auth.PermissionInfo;
 import cc.devcp.project.auth.server.auth.PermissionPersistService;
@@ -11,7 +12,6 @@ import cc.devcp.project.auth.server.auth.RolePersistService;
 import cc.devcp.project.auth.security.AppAuthConfig;
 import cc.devcp.project.auth.security.users.AppUserDetailsServiceImpl;
 import cc.devcp.project.core.utils.Loggers;
-import cc.devcp.project.provider.model.Page;
 import cn.hutool.core.collection.ConcurrentHashSet;
 import io.jsonwebtoken.lang.Collections;
 import org.apache.commons.lang3.StringUtils;

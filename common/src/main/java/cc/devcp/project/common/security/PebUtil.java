@@ -8,7 +8,12 @@ import javax.crypto.spec.PBEParameterSpec;
 import java.security.Key;
 
 /**
- * @author admin
+ * <pre>
+ *     description:
+ * </pre>
+ *
+ * @author deep.wu
+ * @version 2020-04-04
  */
 public class PebUtil {
 

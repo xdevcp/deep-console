@@ -359,12 +359,12 @@
         </encoder>
     </appender>
 
-    <appender name="core-auth"
+    <appender name="module_auth"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_HOME}/core-auth.log</file>
+        <file>${LOG_HOME}/module_auth.log</file>
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_HOME}/core-auth.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <fileNamePattern>${LOG_HOME}/module_auth.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
             <maxFileSize>2GB</maxFileSize>
             <MaxHistory>7</MaxHistory>
             <totalSizeCap>7GB</totalSizeCap>
@@ -458,7 +458,7 @@
 
     <logger name="cc.devcp.project.core.auth" additivity="false">
         <level value="DEBUG"/>
-        <appender-ref ref="core-auth"/>
+        <appender-ref ref="module_auth"/>
     </logger>
 
     <springProfile name="standalone">

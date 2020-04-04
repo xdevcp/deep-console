@@ -5,7 +5,7 @@ import cc.devcp.project.provider.manager.AbstractTask;
 import cc.devcp.project.provider.manager.TaskProcessor;
 import cc.devcp.project.provider.model.ConfigInfo;
 import cc.devcp.project.provider.model.ConfigInfoAggr;
-import cc.devcp.project.provider.model.Page;
+import cc.devcp.project.common.model.page.Page;
 import cc.devcp.project.provider.service.ConfigDataChangeEvent;
 import cc.devcp.project.provider.service.PersistService;
 import cc.devcp.project.provider.service.trace.ConfigTraceService;

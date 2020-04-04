@@ -6,8 +6,8 @@ import cc.devcp.project.common.model.result.ArrayResult;
 import cc.devcp.project.common.model.result.ResEntity;
 import cc.devcp.project.common.validator.Create;
 import cc.devcp.project.common.validator.Modify;
-import cc.devcp.project.console.module.dic.entity.DictionaryEntity;
-import cc.devcp.project.console.module.dic.service.DictionaryService;
+import cc.devcp.project.provider.module.dic.entity.DataDictionaryEntity;
+import cc.devcp.project.provider.module.dic.service.DictionaryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -60,13 +60,13 @@ public class DictionaryController {
 
     @ApiOperation(value = "createDictionary", notes = "创建数据字典")
     @PostMapping("/dict")
-    public ResEntity createDictionary(@RequestBody @Validated(Create.class) DictionaryEntity dictionaryEntity) {
+    public ResEntity createDictionary(@RequestBody @Validated(Create.class) DataDictionaryEntity dictionaryEntity) {
         return dictionaryService.createDictionary(dictionaryEntity);
     }
 
     @ApiOperation(value = "modifyDictionary", notes = "修改数据字典")
     @PutMapping("/dict")
-    public ResEntity modifyDictionary(@RequestBody @Validated(Modify.class) DictionaryEntity dictionaryEntity) {
+    public ResEntity modifyDictionary(@RequestBody @Validated(Modify.class) DataDictionaryEntity dictionaryEntity) {
         return dictionaryService.modifyDictionary(dictionaryEntity);
     }
 
@@ -84,7 +84,7 @@ public class DictionaryController {
 
     @ApiOperation(value = "findDictionaryByType", notes = "根据字典类型查询下一级数据")
     @GetMapping("/dictionary/type")
-    public ResEntity<List<DictionaryEntity>> findDictionaryByType(@RequestParam String dicType) {
+    public ResEntity<List<DataDictionaryEntity>> findDictionaryByType(@RequestParam String dicType) {
         return dictionaryService.findDictionaryByType(dicType);
     }
 }

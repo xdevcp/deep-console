@@ -1,9 +1,11 @@
 package cc.devcp.project.console.config;
 
-
+import cc.devcp.project.common.exception.CommExceptionHandler;
 import cc.devcp.project.core.ControllerMethodsCache;
+import cc.devcp.project.core.filter.LoggerFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,7 @@ import javax.annotation.PostConstruct;
 @Component
 @EnableScheduling
 @PropertySource("/application.properties")
+@Import({CommExceptionHandler.class, LoggerFilter.class})
 public class ConsoleConfig {
 
     @Autowired
@@ -30,7 +33,8 @@ public class ConsoleConfig {
     public void init() {
         methodsCache.initClassMethod("cc.devcp.project.auth.controller");
         methodsCache.initClassMethod("cc.devcp.project.console.*.controller");
-        methodsCache.initClassMethod("cc.devcp.project.provider.controller");
+        methodsCache.initClassMethod("cc.devcp.project.provider.*.controller");
+        methodsCache.initClassMethod("cc.devcp.project.upload.*.controller");
     }
 
     @Bean

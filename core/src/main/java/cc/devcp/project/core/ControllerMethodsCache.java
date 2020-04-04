@@ -1,6 +1,5 @@
 package cc.devcp.project.core;
 
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.reflections.Reflections;
 import org.springframework.stereotype.Component;

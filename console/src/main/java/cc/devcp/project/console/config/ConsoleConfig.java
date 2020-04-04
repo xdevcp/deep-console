@@ -1,11 +1,14 @@
 package cc.devcp.project.console.config;
 
 import cc.devcp.project.common.exception.CommExceptionHandler;
+import cc.devcp.project.common.utils.JacksonUtil;
 import cc.devcp.project.core.ControllerMethodsCache;
 import cc.devcp.project.core.filter.LoggerFilter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
@@ -48,5 +51,11 @@ public class ConsoleConfig {
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
+    }
+
+    @Bean
+    @Primary
+    public ObjectMapper objectMapper() {
+        return JacksonUtil.objectMapper;
     }
 }

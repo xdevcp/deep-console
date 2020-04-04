@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = GlobalRouter.OPEN, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = GlobalRouter.VER_OPEN, produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(tags = "数据字典管理")
 public class DictionaryController {
 

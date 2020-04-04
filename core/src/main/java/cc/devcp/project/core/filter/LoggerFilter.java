@@ -1,15 +1,19 @@
 package cc.devcp.project.core.filter;
 
+import cc.devcp.project.common.constant.GlobalRouter;
 import cc.devcp.project.common.model.result.ResponseWrapper;
 import cc.devcp.project.common.utils.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <pre>
@@ -23,13 +27,30 @@ import java.io.IOException;
 public class LoggerFilter extends OncePerRequestFilter {
 
     private final static String JSON = "json";
-    private final static String OPEN = "/open";
-    private final static String AUTHORIZED = "/authorized";
+
+    private List<String> filterPathList;
+
+    @PostConstruct
+    public void init() {
+        filterPathList = new ArrayList<>();
+        filterPathList.add(GlobalRouter.VER_AUTH);
+        filterPathList.add(GlobalRouter.VER_OPEN);
+        filterPathList.add(GlobalRouter.VER_CONSOLE);
+    }
+
+    public boolean doIgnore(String path) {
+        for (String filterPath : filterPathList) {
+            if (path.indexOf(filterPath) > -1) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String path = httpServletRequest.getServletPath();
-        if (path.indexOf(OPEN) == -1 && path.indexOf(AUTHORIZED) == -1) {
+        if (doIgnore(path)) {
             filterChain.doFilter(httpServletRequest, httpServletResponse);
             return;
         }

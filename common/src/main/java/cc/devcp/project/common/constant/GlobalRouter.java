@@ -15,20 +15,30 @@ public interface GlobalRouter {
     /**
      * 需要鉴权
      */
-    String AUTH = VER + "/auth";
+    String AUTH = "auth";
+    String VER_AUTH = VER + CommonConst.ROOT_WEB_CONTEXT_PATH + AUTH;
 
     /**
      * 无需鉴权
      */
-    String OPEN = VER + "/open";
+    String OPEN = "open";
+    String VER_OPEN = VER + CommonConst.ROOT_WEB_CONTEXT_PATH + OPEN;
 
     /**
      * 测试
      */
-    String OPEN_TEST = OPEN + "/test";
+    String TEST = "test";
+    String VER_OPEN_TEST = VER_OPEN + CommonConst.ROOT_WEB_CONTEXT_PATH + TEST;
 
     /**
      * 运维
      */
-    String OPEN_OPS = OPEN + "/ops";
+    String OPS = "ops";
+    String VER_OPEN_OPS = VER_OPEN + CommonConst.ROOT_WEB_CONTEXT_PATH + OPS;
+
+    /**
+     * 模块
+     */
+    String CONSOLE = "console";
+    String VER_CONSOLE = VER + "/" + CONSOLE;
 }

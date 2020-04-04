@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = GlobalRouter.AUTH + "/upload", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = GlobalRouter.VER_AUTH + "/upload", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(tags = "自定义上传")
 public class UploadController {
 

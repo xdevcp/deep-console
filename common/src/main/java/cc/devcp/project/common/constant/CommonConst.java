@@ -9,6 +9,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class CommonConst {
 
+    /**
+     * the root context path
+     */
+    public static final String ROOT_WEB_CONTEXT_PATH = "/";
+
     public static final String CLIENT_VERSION = "3.0.0";
 
     public static int DATA_IN_BODY_VERSION = 204;

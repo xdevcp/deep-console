@@ -1,4 +1,8 @@
 /*
+ * @Author: deep.ng
+ * @Date: 2020-03-29 12:07:07
+ */
+/*
  * Copyright 1999-2018 Alibaba Group Holding Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +32,7 @@ const login = user => request.post('v1/auth/users/login', user);
 
 const getState = () => dispatch =>
   request
-    .get('v1/console/server/state')
+    .get('v1/console')
     .then(res => {
       dispatch({
         type: GET_STATE,

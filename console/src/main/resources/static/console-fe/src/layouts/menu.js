@@ -71,15 +71,11 @@ export default function(model) {
       ],
     },
     {
-      key: 'serviceManagementVirtual',
+      key: 'dataDictManagement',
       children: [
         {
-          key: 'serviceManagement',
-          url: '/serviceManagement',
-        },
-        {
-          key: 'subscriberList',
-          url: '/subscriberList',
+          key: 'dataDictList',
+          url: '/dataDictList',
         },
       ],
     },

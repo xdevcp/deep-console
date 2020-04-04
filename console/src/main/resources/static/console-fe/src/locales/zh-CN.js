@@ -1,16 +1,6 @@
-/*
- * Copyright 1999-2018 Alibaba Group Holding Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *      http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/**
+ * 中文
  */
-
 const I18N_CONF = {
   Header: {
     home: '首页',
@@ -54,6 +44,8 @@ const I18N_CONF = {
     userList: '用户列表',
     roleManagement: '角色管理',
     privilegeManagement: '权限管理',
+    dataDictManagement: '字典管理',
+    dataDictList: '字典列表',
   },
   Password: {
     passwordNotConsistent: '两次输入密码不一致',
@@ -586,6 +578,53 @@ const I18N_CONF = {
     readOnly: '只读',
     writeOnly: '只写',
     readWrite: '读写',
+  },
+  DataDictList: {
+    titleName: '字典列表',
+    query: '查询',
+    pubNoData: '没有数据',
+    dataCode: '字典代码',
+    dataCodePlaceholder: '请输入',
+    dataType: '字典类型',
+    dataTypePlaceholder: '请输入',
+    field1: '字典类型',
+    field2: '字典代码',
+    field3: '字典值',
+    field4: '排序序号',
+    field5: '状态',
+    field6: '更新时间',
+    operation: '操作',
+    detail: '详情',
+    deleteAction: '删除',
+    prompt: '提示',
+    promptDelete: '确定要删除当前数据吗？',
+    create: '创建',
+  },
+  DataDictDetail: {
+    detailsTitle: '详情',
+    back: '返回',
+    field1: '字典类型',
+    field2: '字典代码',
+    field3: '字典值',
+    field4: '排序序号',
+    field5: '状态',
+    field6: '更新时间',
+    field7: '描述',
+    edit: '编辑',
+  },
+  DataDictEditDialog: {
+    create: '创建',
+    update: '更新',
+    optType: '操作类型',
+    optType1: '字典类型',
+    optType2: '字典代码',
+    dataType: '字典类型',
+    dataCode: '字典代码',
+    dataValue: '字典值',
+    dataDesc: '描述',
+    sortNo: '排序序号',
+    status: '状态',
+    fieldRequired: '请输入必填项',
   },
 };
 

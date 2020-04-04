@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>deep-common</artifactId>
+            <artifactId>deep-auth</artifactId>
         </dependency>
     </dependencies>
 

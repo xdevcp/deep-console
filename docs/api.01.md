@@ -7,10 +7,10 @@
 
 ## 健康检查
 
-http://localhost:8849/app/actuator
+http://localhost:9516/app/actuator
 
-http://localhost:8849/app/health
+http://localhost:9516/app/health
 
-http://localhost:8849/app/health/ready
+http://localhost:9516/app/health/ready
 
-http://localhost:8849/app/v1/cs/health
+http://localhost:9516/app/v1/cs/health

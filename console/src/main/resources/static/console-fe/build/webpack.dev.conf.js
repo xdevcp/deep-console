@@ -30,7 +30,7 @@ module.exports = Object.assign({}, base, {
       context: ['/'],
       changeOrigin: true,
       secure: false,
-      target: 'http://localhost:8849',
+      target: 'http://localhost:9516',
       pathRewrite: {'^/v1' : '/app/v1'}
     }],
     disableHostCheck: true,

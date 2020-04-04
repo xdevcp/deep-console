@@ -1,16 +1,6 @@
-/*
- * Copyright 1999-2018 Alibaba Group Holding Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *      http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/**
+ * Header
  */
-
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -78,20 +68,20 @@ class Header extends React.Component {
       language = 'en-us',
       location: { pathname },
     } = this.props;
-    const { home, docs, blog, community, languageSwitchButton } = locale;
     const { passwordResetUser = '' } = this.state;
-    const BASE_URL = `https://nacos.io/${language.toLocaleLowerCase()}/`;
+    const { home, docs, languageSwitchButton } = locale;
+    const HOME_URL = '/';
+    const DOCS_URL =
+      'http://note.youdao.com/noteshare?id=3ede00878261f772fa8b20c6fee2bd98&sub=3D1C18';
     const NAV_MENU = [
-      { id: 1, title: home, link: BASE_URL },
-      { id: 2, title: docs, link: `${BASE_URL}docs/what-is-nacos.html` },
-      { id: 3, title: blog, link: `${BASE_URL}blog/index.html` },
-      { id: 4, title: community, link: `${BASE_URL}community/index.html` },
+      { id: 1, title: home, link: HOME_URL },
+      { id: 2, title: docs, link: DOCS_URL },
     ];
     return (
       <>
         <header className="header-container header-container-primary">
           <div className="header-body">
-            <a
+            {/* <a
               href={`https://nacos.io/${language.toLocaleLowerCase()}/`}
               target="_blank"
               rel="noopener noreferrer"
@@ -102,7 +92,7 @@ class Header extends React.Component {
                 alt={siteConfig.name}
                 title={siteConfig.name}
               />
-            </a>
+            </a> */}
             {/* if is login page, we will show logout */}
             {pathname !== '/login' && (
               <Dropdown trigger={<div className="logout">{this.getUsername()}</div>}>

@@ -16,10 +16,10 @@ import java.util.Map;
  * on:2019/2/27 11:17 AM
  */
 @RestController
-@RequestMapping("/v1/console/server")
+@RequestMapping("/v1/console")
 public class ServerStateController {
 
-    @GetMapping("state")
+    @GetMapping("")
     public ResponseEntity serverState() {
         Map<String,String> serverState = new HashMap<>(3);
         serverState.put("standalone_mode",SystemUtils.STANDALONE_MODE ?

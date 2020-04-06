@@ -1,6 +1,6 @@
-package cc.devcp.project.console.module.dic.controller;
+package cc.devcp.project.provider.module.dic.controller;
 
-import cc.devcp.project.common.constant.GlobalRouter;
+import cc.devcp.project.common.constant.CxtRouter;
 import cc.devcp.project.common.model.page.PageParam;
 import cc.devcp.project.common.model.result.ArrayResult;
 import cc.devcp.project.common.model.result.ResEntity;
@@ -11,8 +11,8 @@ import cc.devcp.project.provider.module.dic.service.DictionaryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = GlobalRouter.VER_OPEN, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = CxtRouter.gateway_ver_open + "/dict")
 @Api(tags = "数据字典管理")
 public class DictionaryController {
 
@@ -37,12 +37,32 @@ public class DictionaryController {
     private DictionaryService dictionaryService;
 
     @ApiOperation(value = "查询数据字典")
-    @GetMapping("/dict")
+    @GetMapping
     public ResEntity queryDictionary(@RequestParam(required = false) Integer pageNo,
                                      @RequestParam(required = false) Integer pageSize,
                                      @RequestParam(required = false) String dataType,
                                      @RequestParam(required = false) String status) {
         return dictionaryService.queryDictionary(PageParam.of(pageNo, pageSize), dataType, status);
+    }
+
+    @ApiOperation(value = "创建数据字典", notes = "")
+    @PostMapping
+    public ResEntity createDictionary(@RequestBody @Validated(Create.class) DataDictionaryEntity dictionaryEntity) {
+        return dictionaryService.createDictionary(dictionaryEntity);
+    }
+
+    @ApiOperation(value = "修改数据字典", notes = "")
+    @PutMapping
+    public ResEntity modifyDictionary(@RequestBody @Validated(Modify.class) DataDictionaryEntity dictionaryEntity) {
+        return dictionaryService.modifyDictionary(dictionaryEntity);
+    }
+
+    @ApiOperation(value = "逻辑删除数据字典", notes = "")
+    @DeleteMapping
+    public ResEntity removeDictionary(
+        @RequestParam(name = "param", defaultValue = StringUtils.EMPTY) String param) {
+        System.out.println(param + "=====");
+        return dictionaryService.removeDictionary(param);
     }
 
     @ApiOperation(value = "查询数据类型")
@@ -58,32 +78,14 @@ public class DictionaryController {
         return dictionaryService.details(q, w);
     }
 
-    @ApiOperation(value = "createDictionary", notes = "创建数据字典")
-    @PostMapping("/dict")
-    public ResEntity createDictionary(@RequestBody @Validated(Create.class) DataDictionaryEntity dictionaryEntity) {
-        return dictionaryService.createDictionary(dictionaryEntity);
-    }
-
-    @ApiOperation(value = "modifyDictionary", notes = "修改数据字典")
-    @PutMapping("/dict")
-    public ResEntity modifyDictionary(@RequestBody @Validated(Modify.class) DataDictionaryEntity dictionaryEntity) {
-        return dictionaryService.modifyDictionary(dictionaryEntity);
-    }
-
-    @ApiOperation(value = "queryParentId", notes = "根据子级Id查找父级Id")
-    @GetMapping("/dict/getPid")
+    @ApiOperation(value = "根据子级Id查找父级Id")
+    @GetMapping("/getPid")
     public ResEntity<Map<String, Object>> queryParentId(@RequestParam String childId) {
         return dictionaryService.queryParentId(childId);
     }
 
-    @ApiOperation(value = "removeDictionary", notes = "逻辑删除数据字典")
-    @PatchMapping("/dictionary/batch/remove")
-    public ResEntity removeDictionary(@RequestParam String[] ids) {
-        return dictionaryService.removeDictionary(ids);
-    }
-
-    @ApiOperation(value = "findDictionaryByType", notes = "根据字典类型查询下一级数据")
-    @GetMapping("/dictionary/type")
+    @ApiOperation(value = "根据字典类型查询下一级数据")
+    @GetMapping("/type")
     public ResEntity<List<DataDictionaryEntity>> findDictionaryByType(@RequestParam String dicType) {
         return dictionaryService.findDictionaryByType(dicType);
     }

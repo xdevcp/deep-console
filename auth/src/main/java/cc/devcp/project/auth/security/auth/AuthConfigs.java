@@ -1,6 +1,6 @@
 package cc.devcp.project.auth.security.auth;
 
-import cc.devcp.project.core.env.ReloadableConfigs;
+import cc.devcp.project.auth.utils.ReloadableConfigs;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

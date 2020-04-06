@@ -1,4 +1,4 @@
-package cc.devcp.project.core.env;
+package cc.devcp.project.auth.utils;
 
 
 import org.apache.commons.lang3.StringUtils;

@@ -1,6 +1,7 @@
 package cc.devcp.project.console.module.def.controller;
 
 
+import cc.devcp.project.common.constant.CxtRouter;
 import cc.devcp.project.common.utils.VersionUtils;
 import cc.devcp.project.core.utils.SystemUtils;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.Map;
  * on:2019/2/27 11:17 AM
  */
 @RestController
-@RequestMapping("/v1/console")
+@RequestMapping(CxtRouter.gateway_ver)
 public class ServerStateController {
 
     @GetMapping("")

@@ -25,7 +25,26 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>deep-provider</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>deep-upload</artifactId>
+        </dependency>
+
+        <dependency>
+            <!--optional-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <!--optional-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>

@@ -54,7 +54,7 @@ public class GlobalException extends Exception {
         if (this.causeThrowable != null) {
             return causeThrowable.getMessage();
         }
-        return CommonConst.NULL;
+        return CommonConst.EMPTY_STR;
     }
 
     public void setErrCode(int errCode) {

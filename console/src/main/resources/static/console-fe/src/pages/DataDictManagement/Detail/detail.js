@@ -50,7 +50,7 @@ class DataDictDetail extends React.Component {
   getDetail() {
     const { dataType, dataCode } = this.state;
     request({
-      url: `v1/open/details?unicode=utf-8&q=${dataType}&w=${dataCode}`,
+      url: `v1/open/dict/details?ie=utf-8&q=${dataType}&w=${dataCode}`,
       beforeSend: () => this.openLoading(),
       success: res => {
         if (res.success === true) {
@@ -114,6 +114,9 @@ class DataDictDetail extends React.Component {
           </h1>
 
           <Form {...pageFormLayout}>
+            <FormItem label={`${locale.source_id}:`}>
+              <Input value={source.valueId} readOnly />
+            </FormItem>
             <FormItem label={`${locale.field1}:`}>
               <Input value={source.dataType} readOnly />
             </FormItem>

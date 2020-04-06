@@ -1,9 +1,9 @@
 package cc.devcp.project.console.config;
 
+import cc.devcp.project.common.enums.ModuleEnum;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -26,7 +26,6 @@ import java.util.Collections;
  */
 @Configuration
 @EnableSwagger2
-@Profile(value = {"local", "dev", "test","prod"})
 public class Swagger2Config {
 
     @Bean
@@ -35,36 +34,37 @@ public class Swagger2Config {
     }
 
     @Bean
-    public SecurityContext securityContext(){
-        AuthorizationScope[] authorizationScopes = new AuthorizationScope[]{new AuthorizationScope("master", "Master Scope")};
-        return SecurityContext.builder()
-                .securityReferences(Collections.singletonList(new SecurityReference(HttpHeaders.AUTHORIZATION, authorizationScopes)))
-                .forPaths(PathSelectors.any())
-                .build();
+    public Docket all() {
+        return new Docket(DocumentationType.SWAGGER_2)
+            .groupName("all")
+            .apiInfo(apiInfo())
+            .useDefaultResponseMessages(false)
+            .select()
+            //自行修改
+            .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+            .paths(PathSelectors.any())
+            .build()
+            .securitySchemes(Collections.singletonList(securityScheme()))
+            .securityContexts(Collections.singletonList(securityContext()));
     }
 
     @Bean
-    public Docket all() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("all")
-                .apiInfo(apiInfo())
-                .useDefaultResponseMessages(false)
-                .select()
-                //自行修改
-                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-                .paths(PathSelectors.any())
-                .build()
-                .securitySchemes(Collections.singletonList(securityScheme()))
-                .securityContexts(Collections.singletonList(securityContext()));
+    public SecurityContext securityContext() {
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[]{
+            new AuthorizationScope(ModuleEnum.CONSOLE.name(), ModuleEnum.CONSOLE.name() + " Scope")};
+        return SecurityContext.builder()
+            .securityReferences(Collections.singletonList(new SecurityReference(HttpHeaders.AUTHORIZATION, authorizationScopes)))
+            .forPaths(PathSelectors.any())
+            .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("CPD-MASTER 接口文档")
-                //服务条款网址
-                .version("1.0.0")
-                .contact(new Contact("DataValuable", "http://WWW.DataValuable.COM", "zhiyuan.li@datavaluable.com"))
-                .build();
+            .title(String.format("API-%s 接口文档", ModuleEnum.CONSOLE.name()))
+            //服务条款网址
+            .version("1.0.0")
+            .contact(new Contact("deep-api", "http://devcp.cc", "wupands@163.com"))
+            .build();
     }
 
 }

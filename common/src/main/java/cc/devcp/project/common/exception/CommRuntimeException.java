@@ -3,10 +3,13 @@ package cc.devcp.project.common.exception;
 import cc.devcp.project.common.enums.CommEnum;
 
 /**
- * @author lizhiyuan
- * @create 2018-03-12 17:57
- * @desc
- **/
+ * <pre>
+ *     description:
+ * </pre>
+ *
+ * @author deep.wu
+ * @version 2020-04-05
+ */
 public class CommRuntimeException extends RuntimeException{
 
     private static final long serialVersionUID = -238091758285157331L;

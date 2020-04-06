@@ -57,9 +57,9 @@ public class DictionaryService {
             queryWrapper.eq("DIC_STATUS", status);
         }
         queryWrapper.ne("DIC_PARENT_ID", 0);
-        queryWrapper.orderByDesc("DIC_UPDATE_TIME");
         queryWrapper.orderByAsc("DIC_DATA_TYPE");
         queryWrapper.orderByAsc("DIC_SORT_NO");
+        queryWrapper.orderByDesc("DIC_UPDATE_TIME");
 
         PageInfo<DataDictionaryEntity> pageInfo = PageHelper.startPage(param.getCurrent(), param.getSize()).doSelectPageInfo(() -> {
             dictionaryMapper.selectList(queryWrapper);
@@ -77,6 +77,7 @@ public class DictionaryService {
             queryWrapper.like("DIC_DATA_TYPE", q);
         }
         queryWrapper.eq("DIC_PARENT_ID", 0);
+        queryWrapper.orderByAsc("DIC_DATA_TYPE");
         List<DataDictionaryEntity> typeList = dictionaryMapper.selectList(queryWrapper);
 
         List list = new ArrayList();
@@ -248,10 +249,12 @@ public class DictionaryService {
      * @desc: 批量删除数据字典(逻辑删除)
      * @date 2019/12/23 15:04
      */
-    @Transactional(rollbackFor = CommRuntimeException.class)
-    public ResEntity removeDictionary(String[] ids) {
+    public ResEntity removeDictionary(String ids) {
+        if (StrUtil.isBlankOrUndefined(ids)) {
+            return ResEntity.fail(DicEnum.DIC_REMOVE_ERROR);
+        }
         List<Integer> idList = new ArrayList<>();
-        for (String s : ids) {
+        for (String s : ids.split(",")) {
             // 子节点集合
             List<Integer> childList = new ArrayList<>();
             Integer id = Integer.parseInt(s);

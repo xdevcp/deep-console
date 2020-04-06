@@ -87,7 +87,8 @@ class DataDictList extends React.Component {
     // console.log(111);
     setTimeout(() => {
       request({
-        url: `v1/open/dict?${parameter.join('&')}`,
+        method: 'GET',
+        url: `v1/open/dict?t=${timestamp}&status=0&${parameter.join('&')}`,
         beforeSend: () => self.openLoading(),
         success: res => {
           if (res.success === true) {
@@ -120,21 +121,26 @@ class DataDictList extends React.Component {
   deleteOperation(source) {
     const { locale = {} } = this.props;
     const { prompt, promptDelete } = locale;
+    // const { ids } = this.state.rowSelection.selectedRowKeys;
+    // console.log(source.valueId, 111);
     Dialog.confirm({
       title: prompt,
       content: promptDelete,
       onOk: () => {
         request({
           method: 'DELETE',
-          url: `v1/ns/service?dataCode=${source.name}&dataType=${source.dataType}`,
-          dataType: 'text',
+          url: `v1/open/dict?t=${timestamp}&param=${source.valueId}`,
           beforeSend: () => this.openLoading(),
           success: res => {
-            if (res !== 'ok') {
-              Message.error(res);
-              return;
+            // console.log(res.success, 222);
+            if (res.success === true) {
+              this.queryList();
+            } else {
+              Dialog.alert({
+                title: prompt,
+                content: res.message,
+              });
             }
-            this.queryList();
           },
           error: res => Message.error(res.responseText || res.statusText),
           complete: () => this.closeLoading(),
@@ -166,7 +172,7 @@ class DataDictList extends React.Component {
     this.searchTimeout = setTimeout(() => {
       request({
         method: 'GET',
-        url: `v1/open/dataType?unicode=utf-8&q=${value}`,
+        url: `v1/open/dict/dataType?t=${timestamp}&q=${value}`,
         success: res => {
           const dataTypeList = res.result.map(item => ({
             label: item[1],
@@ -280,7 +286,7 @@ class DataDictList extends React.Component {
                       <a
                         onClick={() =>
                           this.props.history.push(
-                            `/dataDictDetail?unicode=utf-8&type=${record.dataType}&code=${record.dataCode}`
+                            `/dataDictDetail?ie=utf-8&type=${record.dataType}&code=${record.dataCode}`
                           )
                         }
                         style={{ marginRight: 5 }}

@@ -21,8 +21,8 @@ public interface DictionaryMapper extends BaseMapper<DataDictionaryEntity> {
      * @date 2019/12/23 14:11
      */
     @Update({"<script>",
-        "UPDATE data_dictionary SET `DIC_STATUS` = #{status} WHERE 1=1",
-        " `DIC_VALUE_ID` IN ",
+        "UPDATE data_dictionary SET `DIC_STATUS` = #{status} WHERE 1 = 1",
+        "   AND `DIC_VALUE_ID` IN",
         "<foreach close=\")\" collection=\"items\" index=\"index\" item=\"item\" open=\"(\" separator=\",\">",
         "#{item}",
         "</foreach>",

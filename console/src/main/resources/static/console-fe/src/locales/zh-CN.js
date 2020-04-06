@@ -603,6 +603,7 @@ const I18N_CONF = {
   DataDictDetail: {
     detailsTitle: '详情',
     back: '返回',
+    source_id: 'id',
     field1: '字典类型',
     field2: '字典代码',
     field3: '字典值',

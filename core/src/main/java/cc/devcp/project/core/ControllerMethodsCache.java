@@ -27,7 +27,7 @@ public class ControllerMethodsCache {
     }
 
     public Method getMethod(String httpMethod, String path) {
-        String key = httpMethod + "-->" + path.replace("/nacos", "");
+        String key = httpMethod + "-->" + path.replace("/app", "");
         return methods.get(key);
     }
 

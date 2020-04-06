@@ -1,6 +1,6 @@
 package cc.devcp.project.upload.module.excel.controller;
 
-import cc.devcp.project.common.constant.GlobalRouter;
+import cc.devcp.project.common.constant.CxtRouter;
 import cc.devcp.project.common.model.page.PageParam;
 import cc.devcp.project.common.model.page.PageResult;
 import cc.devcp.project.common.model.result.ResEntity;
@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = GlobalRouter.VER_AUTH + "/upload", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = CxtRouter.gateway_ver_auth + "/upload", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(tags = "自定义上传")
 public class UploadController {
 

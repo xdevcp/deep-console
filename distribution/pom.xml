@@ -5,7 +5,7 @@
     <parent>
         <groupId>cc.devcp.project</groupId>
         <artifactId>deep-all</artifactId>
-        <version>2020.01</version>
+        <version>20.0.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -115,7 +115,7 @@
                         </executions>
                     </plugin>
                 </plugins>
-                <finalName>deep-console</finalName>
+                <finalName>deep</finalName>
             </build>
         </profile>
     </profiles>

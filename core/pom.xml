@@ -5,7 +5,7 @@
     <parent>
         <groupId>cc.devcp.project</groupId>
         <artifactId>deep-all</artifactId>
-        <version>2020.01</version>
+        <version>20.0.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -61,6 +61,12 @@
             <!--optional-->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 

@@ -254,7 +254,7 @@ public class DictionaryService {
             return ResEntity.fail(DicEnum.DIC_REMOVE_ERROR);
         }
         List<Integer> idList = new ArrayList<>();
-        for (String s : ids.split(",")) {
+        for (String s : ids.split(StrUtil.COMMA)) {
             // 子节点集合
             List<Integer> childList = new ArrayList<>();
             Integer id = Integer.parseInt(s);

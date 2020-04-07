@@ -13,49 +13,49 @@ public interface CxtRouter {
     /**
      * 网关
      */
-    String gateway_str = "gateway";
-    String gateway = ROOT_WEB_CONTEXT_PATH + gateway_str;
+    String GATEWAY_STR = "gateway";
+    String GATEWAY = ROOT_WEB_CONTEXT_PATH + GATEWAY_STR;
 
     /**
      * 版本号
      */
-    String ver_str = "v1";
-    String ver = ROOT_WEB_CONTEXT_PATH + ver_str;
-    String gateway_ver = gateway + ver;
+    String VER_STR = "v1";
+    String VER = ROOT_WEB_CONTEXT_PATH + VER_STR;
+    String GATEWAY_VER = GATEWAY + VER;
 
     /**
      * 需要鉴权
      */
-    String auth_str = "auth";
-    String auth = ROOT_WEB_CONTEXT_PATH + auth_str;
-    String gateway_ver_auth = gateway_ver + auth;
+    String AUTH_STR = "auth";
+    String AUTH = ROOT_WEB_CONTEXT_PATH + AUTH_STR;
+    String GATEWAY_VER_AUTH = GATEWAY_VER + AUTH;
 
     /**
      * 模块
      */
-    String console_str = "console";
-    String console = ROOT_WEB_CONTEXT_PATH + console_str;
-    String gateway_ver_console = gateway_ver + console;
+    String CONSOLE_STR = "console";
+    String CONSOLE = ROOT_WEB_CONTEXT_PATH + CONSOLE_STR;
+    String GATEWAY_VER_CONSOLE = GATEWAY_VER + CONSOLE;
 
     /**
      * 无需鉴权
      */
-    String open_str = "open";
-    String open = ROOT_WEB_CONTEXT_PATH + open_str;
-    String gateway_ver_open = gateway_ver + open;
+    String OPEN_STR = "open";
+    String OPEN = ROOT_WEB_CONTEXT_PATH + OPEN_STR;
+    String GATEWAY_VER_OPEN = GATEWAY_VER + OPEN;
 
     /**
      * 测试
      */
-    String test_str = "test";
-    String test = ROOT_WEB_CONTEXT_PATH + test_str;
-    String gateway_ver_open_test = gateway_ver_open + test;
+    String TEST_STR = "test";
+    String TEST = ROOT_WEB_CONTEXT_PATH + TEST_STR;
+    String GATEWAY_VER_OPEN_TEST = GATEWAY_VER_OPEN + TEST;
 
     /**
      * 运维
      */
-    String ops_str = "ops";
-    String ops = ROOT_WEB_CONTEXT_PATH + ops_str;
-    String gateway_ver_open_ops = gateway_ver_open + ops;
+    String OPS_STR = "ops";
+    String OPS = ROOT_WEB_CONTEXT_PATH + OPS_STR;
+    String GATEWAY_VER_OPEN_OPS = GATEWAY_VER_OPEN + OPS;
 
 }

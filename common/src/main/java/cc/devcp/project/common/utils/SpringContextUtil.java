@@ -6,14 +6,12 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by IntelliJ IDEA.
+ * <pre>
+ *     description:
+ * </pre>
  *
- * @Description: TODO
- * @Author: BaiJinhua
- * @Date: 2019/11/29 18:41
- * @See: com.lingyue.common.application
- * @Version: 1.0
- * Copyright: Copyright (c) 2019
+ * @author deep.wu
+ * @version 2020-04-07
  */
 @Component
 public class SpringContextUtil implements ApplicationContextAware {
@@ -27,6 +25,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     /**
      * 获取applicationContext
+     *
      * @return
      */
     public static ApplicationContext getApplicationContext() {
@@ -35,6 +34,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     /**
      * 通过name获取 Bean.
+     *
      * @param name
      * @return
      */
@@ -44,6 +44,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     /**
      * 通过class获取Bean.
+     *
      * @param clazz
      * @param <T>
      * @return
@@ -54,6 +55,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     /**
      * 通过name,以及Clazz返回指定的Bean
+     *
      * @param name
      * @param clazz
      * @param <T>

@@ -5,7 +5,7 @@
     <parent>
         <groupId>cc.devcp.project</groupId>
         <artifactId>deep-all</artifactId>
-        <version>2020.01</version>
+        <version>20.0.1</version>
     </parent>
 
     <artifactId>deep-gateway</artifactId>
@@ -46,6 +46,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
         </dependency>
@@ -58,6 +64,12 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
 
     </dependencies>

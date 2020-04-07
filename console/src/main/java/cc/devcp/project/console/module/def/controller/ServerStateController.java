@@ -17,7 +17,7 @@ import java.util.Map;
  * on:2019/2/27 11:17 AM
  */
 @RestController
-@RequestMapping(CxtRouter.gateway_ver)
+@RequestMapping(CxtRouter.GATEWAY_VER)
 public class ServerStateController {
 
     @GetMapping("")

@@ -1,4 +1,4 @@
-package cc.devcp.project.common.model.result;
+package cc.devcp.project.core.filter;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.WriteListener;

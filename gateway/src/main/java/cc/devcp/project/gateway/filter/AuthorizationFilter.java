@@ -119,22 +119,21 @@ public class AuthorizationFilter implements GlobalFilter, Ordered {
 
 
     public enum ResponseEnum implements CommEnum<Integer> {
-
+        /**
+         * ResponseEnum
+         */
         UNAUTHORIZED(40100, "无效的令牌"),
         FORBIDDEN(40300, "禁止访问"),
         AUTH_SERVER_ERROR(40100, "鉴权系统暂不可用"),
         ;
 
-
         private Integer code;
-
         private String content;
 
         ResponseEnum(Integer code, String content) {
             this.code = code;
             this.content = content;
         }
-
 
         @Override
         public Integer getCode() {

@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = CxtRouter.gateway)
+@RequestMapping(value = CxtRouter.GATEWAY)
 public class GatewayController {
 
     @Autowired

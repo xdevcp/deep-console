@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = CxtRouter.gateway_ver_auth + "/upload", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = CxtRouter.GATEWAY_VER_AUTH + "/upload", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(tags = "自定义上传")
 public class UploadController {
 

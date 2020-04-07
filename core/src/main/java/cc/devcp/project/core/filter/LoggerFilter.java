@@ -1,7 +1,6 @@
 package cc.devcp.project.core.filter;
 
 import cc.devcp.project.common.constant.CxtRouter;
-import cc.devcp.project.common.model.result.ResponseWrapper;
 import cc.devcp.project.common.utils.JacksonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -33,9 +32,9 @@ public class LoggerFilter extends OncePerRequestFilter {
     @PostConstruct
     public void init() {
         filterPathList = new ArrayList<>();
-        filterPathList.add(CxtRouter.gateway_ver_auth);
-        filterPathList.add(CxtRouter.gateway_ver_open);
-        filterPathList.add(CxtRouter.gateway_ver_console);
+        filterPathList.add(CxtRouter.GATEWAY_VER_AUTH);
+        filterPathList.add(CxtRouter.GATEWAY_VER_OPEN);
+        filterPathList.add(CxtRouter.GATEWAY_VER_CONSOLE);
     }
 
     public boolean doIgnore(String path) {

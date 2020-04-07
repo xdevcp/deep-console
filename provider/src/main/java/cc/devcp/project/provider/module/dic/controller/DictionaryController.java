@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping(value = CxtRouter.gateway_ver_open + "/dict")
+@RequestMapping(value = CxtRouter.GATEWAY_VER_OPEN + "/dict")
 @Api(tags = "数据字典管理")
 public class DictionaryController {
 

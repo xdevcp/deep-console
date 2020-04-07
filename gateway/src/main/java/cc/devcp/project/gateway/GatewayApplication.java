@@ -8,6 +8,14 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * <pre>
+ *     description:
+ * </pre>
+ *
+ * @author deep.wu
+ * @version 2020-04-07
+ */
 @EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
